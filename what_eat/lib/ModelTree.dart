@@ -83,10 +83,16 @@ class _ModelTreeState extends State<ModelTree> {
     Map<String, dynamic> feature = this.features[next_key.toString()];
     String question = feature['feature_names'];
     print('set to $next_key question to : $question');
-    setState(() {
-      currentFeatureIndex = next_key;
-      currentQuestion = question;
-    });
+    if(currentQuestion == question && currentFeatureIndex == next_key){
+      setState(() {
+        result = -2;
+      });
+    }else{
+      setState(() {
+        currentFeatureIndex = next_key;
+        currentQuestion = question;
+      });
+    }
   }
 
   dynamic loadJson(String path) async {
@@ -168,7 +174,7 @@ class _ModelTreeState extends State<ModelTree> {
           'Model test'
         ),
       ),
-      body: (this.result < 0 ) ? Column(
+      body: (this.result == -1 ) ? Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           ///question :
@@ -180,15 +186,16 @@ class _ModelTreeState extends State<ModelTree> {
           ///answer
           Container(
             child : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 RaisedButton(
                   child:Text('Yes'),
                   onPressed: (){setValue(1);},
                 ),
-                RaisedButton(
+                /*RaisedButton(
                   child:Text('Yes and No'),
                   onPressed: (){setValue(2);},
-                ),
+                ),*/
                 RaisedButton(
                   child:Text('No'),
                   onPressed: (){setValue(0);},
@@ -203,19 +210,35 @@ class _ModelTreeState extends State<ModelTree> {
         ],
       ):
         Container(
-          child: Column(
+          child: (result != -2 ) ?
+          Column(
             children: <Widget>[
               Text("the Result is ${this.classes[result.toString()]['label']}", style: TextStyle(fontSize: 30),),
               IconButton(icon: Icon(Icons.refresh, color: Colors.deepOrange,), onPressed: (){
                 setState(() {
                   this.result = -1;
                   this.input = List(nb_features);
+                  this.infos = [];
                   nextFeatures();
                 });
               })
 
             ],
-          ),
+          ) :
+          Column(
+            children: <Widget>[
+              Text("the Result are :  ${infos.join('\n')}", style: TextStyle(fontSize: 30),),
+              IconButton(icon: Icon(Icons.refresh, color: Colors.deepOrange,), onPressed: (){
+                setState(() {
+                  this.result = -1;
+                  this.input = List(nb_features);
+                  this.infos = [];
+                  nextFeatures();
+                });
+              })
+
+            ],
+          )    ,
         )
     );
   }

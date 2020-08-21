@@ -23,9 +23,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sklite:
-    git:
-      url: https://github.com/axegon/SkLite-dart.git
+  http:
+  firebase_core:
+  cloud_firestore:
+  firebase_storage:
+  permission_handler:
+  image_picker:
+  sklite: ^0.0.1
+  url_launcher:
+  dartpedia: ^1.6.6
+  carousel_slider: ^2.2.1
 
 
 
@@ -51,6 +58,8 @@ flutter:
     - assets/decisionTree.json
     - assets/features.json
     - assets/classes.json
+    - assets/color_placeholder.png
+    - assets/google_search.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "902562358687",
+    "firebase_url": "https://project-food-892bf.firebaseio.com",
+    "project_id": "project-food-892bf",
+    "storage_bucket": "project-food-892bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902562358687:android:f7d54675f474247fdb89aa",
+        "android_client_info": {
+          "package_name": "com.whateat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902562358687-1s3d5a04mpmel1jbl57q9ld4ek5d957g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxdF6HDCgtj_w5r3c-gSZK3GzxXnLLfk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902562358687-1s3d5a04mpmel1jbl57q9ld4ek5d957g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,11 @@
 import 'dart:math';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sklite/tree/tree.dart';
-import 'package:sklite/utils/io.dart';
 import 'dart:convert';
+
+import 'package:whateat/Result.dart';
 
 class ModelTree extends StatefulWidget {
 
@@ -32,26 +33,29 @@ class _ModelTreeState extends State<ModelTree> {
   int currentFeatureIndex = 0;
   String currentQuestion ="";
 
+  Future init;
 
-  _ModelTreeState() {
+  @override
+  void initState() {
+    super.initState();
+    print("ok init state");
     try {
-      loadJson('assets/decisionTree.json').then((dynamic dataTree ){
+      init = Future.wait([loadJson('assets/decisionTree.json').then((Map<dynamic, dynamic> dataTree ){
         this.treeClassifier = DecisionTreeClassifier.fromMap(dataTree);
-      });
-      loadJson('assets/classes.json').then((dynamic data){
+      }),
+      loadJson('assets/classes.json').then((Map<dynamic, dynamic> data){
         classes = data;
-        print( 'classes : ${classes.length}');
         nb_classes = classes.length;
-      });
-      loadJson('assets/features.json').then((dynamic data ){
+      }),
+      loadJson('assets/features.json').then((Map<dynamic, dynamic> data ){
         features = data;
         nb_features = features.length;
         input = List(nb_features);
         print(input);
         nextFeatures();
-      });
+      })]).then((value) => print('init'));
     }catch(e){
-      print(e);
+      print("error $e");
     }
   }
 
@@ -82,7 +86,7 @@ class _ModelTreeState extends State<ModelTree> {
     });
     Map<String, dynamic> feature = this.features[next_key.toString()];
     String question = feature['feature_names'];
-    print('set to $next_key question to : $question');
+    print(question == 1 ? "yes" : "no");
     if(currentQuestion == question && currentFeatureIndex == next_key){
       setState(() {
         result = -2;
@@ -95,7 +99,7 @@ class _ModelTreeState extends State<ModelTree> {
     }
   }
 
-  dynamic loadJson(String path) async {
+  Future<Map<dynamic, dynamic>> loadJson(String path) async {
     String data = await rootBundle.loadString(path);
     return json.decode(data);
   }
@@ -109,14 +113,26 @@ class _ModelTreeState extends State<ModelTree> {
 
   testValue(){
     int nb_null = 0;
-    input.forEach((e){
-      if(e == null || e == 2){
+    double nullImportance = 0;
+    List<double> test = [];
+    for(int i = 0 ; i < input.length; i++){
+      if(input[i] == null || input[i] == 2){
         nb_null++;
+        nullImportance += features[i.toString()]["features_importance"];
       }
-    });
+    }
+    for(int i = 0 ; i < input.length; i++){
+      if(input[i] == null){
+        test.insert(i,((1.0/nullImportance)* features[i.toString()]["features_importance"]) );
+      }else{
+        test.insert(i,input[i].ceilToDouble());
+      }
+    }
+    print(test);
+    print("actual prediction : ${this.classes[treeClassifier.predict(test).toString()]}");
     int nb_case = pow(2, nb_null);
     print("nb of possibilityes  = $nb_case");
-    if(nb_case < 1000 ) {
+    if(nb_case < 5000 ) {
       List<List<double>> predictions = [];
       predictions.add(input);
 
@@ -166,6 +182,15 @@ class _ModelTreeState extends State<ModelTree> {
 
   }
 
+  void reset(){
+    setState(() {
+      this.result = -1;
+      this.input = List(nb_features);
+      this.infos = [];
+      nextFeatures();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,72 +199,75 @@ class _ModelTreeState extends State<ModelTree> {
           'Model test'
         ),
       ),
-      body: (this.result == -1 ) ? Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          ///question :
-          Container(
-            child: Text(
-              this.currentQuestion
-            ),
-          ),
-          ///answer
-          Container(
-            child : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                RaisedButton(
-                  child:Text('Yes'),
-                  onPressed: (){setValue(1);},
-                ),
-                /*RaisedButton(
-                  child:Text('Yes and No'),
-                  onPressed: (){setValue(2);},
-                ),*/
-                RaisedButton(
-                  child:Text('No'),
-                  onPressed: (){setValue(0);},
-                )
-              ],
-            )
-          ),
-          ///proba
-          Container(
-            child: Text(infos.join('\n')),
-          )
-        ],
-      ):
-        Container(
-          child: (result != -2 ) ?
-          Column(
-            children: <Widget>[
-              Text("the Result is ${this.classes[result.toString()]['label']}", style: TextStyle(fontSize: 30),),
-              IconButton(icon: Icon(Icons.refresh, color: Colors.deepOrange,), onPressed: (){
-                setState(() {
-                  this.result = -1;
-                  this.input = List(nb_features);
-                  this.infos = [];
-                  nextFeatures();
-                });
-              })
+      body: FutureBuilder(
+        future: Future.value(init),
+        builder: (context, snapshot){
+          if(snapshot.connectionState == ConnectionState.done){
+            return Container(
+              child: (this.result == -1 ) ? Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  ///question :
+                  Container(
+                    child: Text(
+                        this.currentQuestion
+                    ),
+                  ),
+                  ///answer
+                  Container(
+                      child : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          RaisedButton(
+                            child:Text('Yes'),
+                            onPressed: (){setValue(1);},
+                          ),
+                          /*RaisedButton(
+                    child:Text('Yes and No'),
+                    onPressed: (){setValue(2);},
+                  ),*/
+                          RaisedButton(
+                            child:Text('No'),
+                            onPressed: (){setValue(0);},
+                          )
+                        ],
+                      )
+                  ),
+                  ///proba
+                  Container(
+                    child: Text(infos.join('\n')),
+                  )
+                ],
+              ):
+              Container(
+                child: (result != -2 ) ?
+                Column(
+                  children: <Widget>[
+                    Text("the Result is ${this.classes[result.toString()]['label']}", style: TextStyle(fontSize: 30),),
+                    IconButton(icon: Icon(Icons.send, color: Colors.primaries.first,), onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context){
+                            return Result(this.classes[result.toString()]['label'], result.toString());
+                          }
+                      ));
+                    }),
+                    IconButton(icon: Icon(Icons.refresh, color: Colors.deepOrange,), onPressed: reset),
+                  ],
+                ) :
+                Column(
+                  children: <Widget>[
+                    Text("the Result are :  ${infos.join('\n')}", style: TextStyle(fontSize: 30),),
+                    IconButton(icon: Icon(Icons.refresh, color: Colors.deepOrange,), onPressed: reset)
 
-            ],
-          ) :
-          Column(
-            children: <Widget>[
-              Text("the Result are :  ${infos.join('\n')}", style: TextStyle(fontSize: 30),),
-              IconButton(icon: Icon(Icons.refresh, color: Colors.deepOrange,), onPressed: (){
-                setState(() {
-                  this.result = -1;
-                  this.input = List(nb_features);
-                  this.infos = [];
-                  nextFeatures();
-                });
-              })
-
-            ],
-          )    ,
-        )
+                  ],
+                )    ,
+              ),
+            );
+          }else{
+            return Center(child : CircularProgressIndicator());
+          }
+        },
+      )
     );
   }
 

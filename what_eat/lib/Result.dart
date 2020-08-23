@@ -30,13 +30,7 @@ class Result extends StatefulWidget {
 
   FutureOr<List<ImageProvider>> getImages() async {
     GoogleCustomSearch gcs = GoogleCustomSearch();
-    return gcs.searchImage("\"${this.result}\"", 5).then((value){
-      List<dynamic> items = value["items"];
-      List<dynamic> urls = items.map((item){
-        return item["link"];
-      }).toList();
-      return urls.map((e) => NetworkImage(e.toString())).toList();
-    });
+    return gcs.searchImage("\"${this.result}\"", 5);
 
     /*
       try {

@@ -21,18 +21,23 @@ class GoogleCustomSearch {
     });
   }
 
-  Future<Map<String,dynamic>> searchImage(String query, int nbImages) async {
+  Future<List<ImageProvider>> searchImage(String query, int nbImages) async {
     String key = await Future.value(_api_Key);
     String cx = await Future.value(_searchEngineId);
     String formatedQuery = query.split(' ').join('%20');
     String apiUrl = "https://www.googleapis.com/customsearch/v1?key=${key}&cx=$cx&q=$query&searchType=image&num=$nbImages";
-
     return await http.get(apiUrl).then((rep) {
-      return jsonDecode(rep.body);
+      dynamic value = jsonDecode(rep.body);
+			List<dynamic> items = value["items"];
+      List<dynamic> urls = items.map((item){
+        return item["link"];
+      }).toList();
+      return urls.map((e) => NetworkImage(e.toString())).toList();
     });
   }
 
-
-
+	Future<ImageProvider> getImage(String query) async {
+		return searchImage(query, 1).then(list=> list[0]);
+	}
 
 }

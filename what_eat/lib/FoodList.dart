@@ -17,6 +17,7 @@ class _FoodListState extends State<FoodList> {
   String collectionName = 'foods';
   ScrollController _scrollController;
   Future init;
+	GoogleCustomSearch gcs;
   @override
   void initState() {
     // TODO: implement initState
@@ -28,6 +29,7 @@ class _FoodListState extends State<FoodList> {
     });
 
     _scrollController = ScrollController();
+		gcs = GoogleCustomSearch();
 
 
   }
@@ -105,7 +107,20 @@ class _FoodListState extends State<FoodList> {
                                   width: 20,
                                   child : foodData['photoUrl'] != null ?
                                   Image.network(foodData["photoUrl"], fit: BoxFit.cover,) :
-                                  Icon(Icons.add_a_photo),
+                                  FutureBuilder(
+													          future: Future.value(gcs.getImage(foodData["label"])),
+													          builder: (context, snapshot){
+													            if(snapshot.connectionState == ConnectionState.done){
+																				return FadeInImage(
+                                          image: snapshot.data,
+                                          placeholder: AssetImage("assets\color_placeholder.png"),
+                                          fit: BoxFit.cover,
+                                        );
+																			}else{
+													              return Image.asset("assets\color_placeholder.png",fit: BoxFit.cover);
+																			}
+																		}
+																	),
                                 ),
 
                               );

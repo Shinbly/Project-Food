@@ -1,7 +1,7 @@
 ,,,,,,,,,,,,,,,,,,,,,,
 Food,FoodId,Does it contain cheese ?,Does it contain dought (ie : bread) ?,Does it contain vegetables ?,Is it healthy ?,Is there a soup ?,Is it cooked in hoven ?,Is it a hot meal ?,Vegetarian ?,Is there sea food or fish ? ,Is it sauce based food ?,Is the preparation fast ?,Is it Asian food ?,Is it Italian food ?,Is it Mexican food?,Do you eat it with your finger ?,Does it contain Pork ?,Is it Japanese food ?,Does it contain beef ?,Is it Korean food ? ,Is it French food?,Is it Arabic food?
 Pizza,0,yes,yes,yes,no,no,yes,yes,no,yes and no,no,yes,no,yes,no,yes,yes and no,no,yes and no,no,no,no
-Burger,1,yes and no,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,no,no,no
+Hamburger,1,yes and no,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,no,no,no
 Pasta,2,yes and no,no,yes,yes and no,no,no,yes,yes and no,yes and no,no,yes,no,yes,no,no,no,no,yes and no,no,no,no
 Hot dog,3,yes and no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,no,no
 Salad,4,yes and no,no,yes,yes,no,no,no,yes and no,no,no,yes,no,no,no,no,no,no,no,no,yes and no,no
@@ -14,7 +14,7 @@ Couscous,10,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes
 Paella,11,no,no,yes,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
 Vegetable soup,12,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes and no,yes and no
 Spaghetti bolognaise,13,yes and no,no,yes,no,no,no,yes,no,no,yes,yes,no,yes,no,no,no,no,yes,no,no,no
-Nems,14,no,no,yes,no,no,no,yes,yes and no,no,no,no,yes,no,no,yes,yes and no,no,no,no,no,no
+Spring Rolls,14,no,no,yes,no,no,no,yes,yes and no,no,no,no,yes,no,no,yes,yes and no,no,no,no,no,no
 Chop Suey,15,no,no,yes,yes,no,no,yes,no,yes and no,no,no,yes,no,no,no,no,no,no,no,no,no
 Tartiflette,16,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no
 Tonkatsu,17,no,no,yes and no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,no
@@ -24,8 +24,8 @@ Burritos,20,yes and no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,yes,no,no,yes,
 Fajitas,21,yes and no,yes,yes,no,no,no,yes,yes and no,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no
 Enchiladas,22,yes and no,no,yes,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no
 Blanquette de veau,23,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no
-Banh Bao,24,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,yes,yes,no,no,no,no,no
-Lasagna,25,yes,no,yes,no,no,yes,yes,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no
+Bánh bao,24,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,yes,yes,no,no,no,no,no
+Lasagne,25,yes,no,yes,no,no,yes,yes,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no
 Fried noodles,26,no,no,yes,no,no,no,yes,yes and no,no,no,yes,yes,no,no,no,no,no,yes and no,no,no,no
 Korean BBQ,27,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,yes,no,no,no
 Crumble de tomates,28,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes and no,no

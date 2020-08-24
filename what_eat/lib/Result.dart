@@ -11,7 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'package:whateat/GoogleCustomSearch.dart';
+import 'file:///C:/Project-Food/what_eat/lib/APIs/GoogleCustomSearch.dart';
+import 'package:whateat/APIs/Spoonacular.dart';
 
 
 
@@ -20,61 +21,19 @@ class Result extends StatefulWidget {
   String id;
   FutureOr<CollectionReference> foods;
   String collectionName = 'foods';
-  FutureOr<dynamic> wikipediaPage;
-  FutureOr<List<ImageProvider>> fetchedImages;
+  bool useCached = false;
+
+  ///map with full for fullsize images and thumbnail for thumbnails image
+  FutureOr<List<Map<String,ImageProvider>>> fetchedImages;
 
   Result(this.result, this.id){
     foods = initDB();
     fetchedImages = getImages();
   }
 
-  FutureOr<List<ImageProvider>> getImages() async {
+  FutureOr<List<Map<String,ImageProvider>>> getImages() async {
     GoogleCustomSearch gcs = GoogleCustomSearch();
-    return gcs.searchImage("\"${this.result}\"", 5);
-
-    /*
-      try {
-
-        String titleQuery = this.result.split(' ').join('%20');
-        if(retry)
-          titleQuery = titleQuery.substring(0, titleQuery.length-1);
-        String apiUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=${titleQuery}&prop=images&format=json";
-        print(apiUrl);
-        return await http.get(apiUrl).then((rep) {
-          List<Image> imageList = [];
-          Map<String, dynamic> jsonData = jsonDecode(rep.body);
-          List<dynamic> images = jsonData["query"]["pages"][jsonData["query"]["pages"].keys.first]["images"];
-          List<Future<String>> urls;
-          if(images != null && images.length> 0){
-            urls = images.map((image) async {
-              String title = image["title"];
-              if (!title.contains('.svg')) {
-                String mediaUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=${title.split(' ').join('%20')}&prop=imageinfo&iiprop=url&format=json";
-                dynamic mediaRep = await http.get(mediaUrl);
-                dynamic jsonDataMedia = jsonDecode(mediaRep.body);
-                String imageUrl = jsonDataMedia["query"]["pages"][jsonDataMedia["query"]["pages"].keys.first]["imageinfo"][0]["url"];
-                return imageUrl;
-              } else {
-                return null;
-              }
-            }).toList();
-            return Future.wait(urls).then((value) {
-              List urls = value.sublist(0);
-              urls.removeWhere((element) => element == null);
-              print(urls);
-              return urls.map((e) => NetworkImage(e)).toList();
-            });
-          }else{
-            if(titleQuery.endsWith('s') && !retry){
-              return getImages(retry: true);
-            }
-            return [];
-          }
-        });
-      }catch(e){
-        print(e);
-        return [];
-      }*/
+    return gcs.searchImage(this.result, cached: useCached);
   }
 
   Future<CollectionReference> initDB() async {
@@ -258,16 +217,16 @@ class _ResultState extends State<Result> {
                             padding: const EdgeInsets.only(top:8.0, bottom: 8),
                             child: FutureBuilder(
                               future: Future.value(widget.fetchedImages),
-                              builder: (context, wikiImagesSnapshot){
-                                if(wikiImagesSnapshot.connectionState == ConnectionState.done){
-                                  List<ImageProvider> images = wikiImagesSnapshot.data;
+                              builder: (context, gcsImagesSnapshot){
+                                if(gcsImagesSnapshot.connectionState == ConnectionState.done && snapshot.data != null){
+                                  List<Map<String,ImageProvider>> images = gcsImagesSnapshot.data;
                                   if(images != null){
                                     if(images.length>1){
                                         return CarouselSlider(
-                                          items: images.map((e){
+                                          items: images.map((image){
                                             return FadeInImage(
-                                              image: e,
-                                              placeholder: AssetImage("color_placeholder.png"),
+                                              image: image["full"],
+                                              placeholder: image["thumbnail"],
                                               height: 200,
                                               width: 300,
                                               fit: BoxFit.cover,
@@ -282,8 +241,8 @@ class _ResultState extends State<Result> {
                                     }
                                     if(images.length== 1){
                                         return FadeInImage(
-                                          image: images[0],
-                                          placeholder: AssetImage("color_placeholder.png"),
+                                          image: images[0]["full"],
+                                          placeholder: images[0]["thumbnail"],
                                           height: 200,
                                           width: 300,
                                           fit: BoxFit.cover,
@@ -293,7 +252,7 @@ class _ResultState extends State<Result> {
                                   }
                                   return Container();
                                 }else{
-                                  return Container( width : 200, height: 200,child: Center(child: CircularProgressIndicator(),));
+                                  return Container();
                                 }
                               },
                             ),
@@ -303,33 +262,6 @@ class _ResultState extends State<Result> {
                             mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              foodData["photoUrl"] != null ?
-                              Image.network(foodData["photoUrl"]) :
-                              Container(
-                                child: Column(
-                                  mainAxisAlignment:  MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    InkWell(
-                                      onTap: (){uploadPic(context);},
-                                      child: Container(
-                                        child :Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:  CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text("add a Picture for ${foodData["label"]}"),
-                                            Icon(Icons.add_a_photo),
-                                          ],
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.black26
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
                               ListTile(
                                 title: Text("${foodData["label"]} in your position ? "),
                                 leading: Icon(Icons.not_listed_location),
@@ -341,6 +273,7 @@ class _ResultState extends State<Result> {
                                   title:Text("Get recipes for ${foodData["label"]}"),
                                   leading: Icon(Icons.receipt),
                                   onTap:  () {
+                                    //Spoonacular.searchFood(foodData["label"]);
                                     String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
                                     _launchURL(allrecipesUrl);
                                   }),

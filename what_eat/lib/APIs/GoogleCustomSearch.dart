@@ -27,8 +27,9 @@ class GoogleCustomSearch {
 
   Future<List<Map<String,ImageProvider>>> searchImage(String query, {bool cached = true}) async {
     dynamic result = cached ? await getInCache(query, "gcs") : null;
-    dynamic value;
+    Map<String,dynamic> value;
     if (result != null) {
+      print(result);
       value = jsonDecode(result);
     } else {
       String key = await Future.value(_api_Key);
@@ -48,16 +49,19 @@ class GoogleCustomSearch {
         storeInCache(query, "gcs", searchResult);
       }
     }
-    List<dynamic> items = value["items"];
-    List<Map<String, ImageProvider>> images = items.map((item) {
-      Map<String, ImageProvider> image =
-      {
-        "full": NetworkImage(item["link"]),
-        "thumbnail": NetworkImage(item["image"]["thumbnailLink"])
-      };
-      return image;
-    }).toList();
-    return images;
+    print(value);
+    if(value["items"] != null) {
+      List<dynamic> items = value["items"];
+      dynamic images = items.map((dynamic item) {
+        Map<String, ImageProvider> image =
+        {
+          "full": NetworkImage(item["link"]),
+          "thumbnail": NetworkImage(item["image"]["thumbnailLink"])
+        };
+        return image;
+      }).toList();
+      return images;
+    }
   }
 
 	Future<Map<String,ImageProvider>> getImage(String query, {bool cached}) async {

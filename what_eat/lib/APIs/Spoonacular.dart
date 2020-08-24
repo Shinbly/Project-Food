@@ -17,7 +17,7 @@ class Spoonacular {
       value = jsonDecode(result);
     } else {
       Uri apiUri = new Uri.http(
-          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com", "/recipes/search", {
+          "api.spoonacular.com", "/recipes/complexSearch", {
         "query": query,
         "instructionsRequired": "true",
         "number": "5"

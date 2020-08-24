@@ -22,6 +22,7 @@ class Result extends StatefulWidget {
   FutureOr<CollectionReference> foods;
   String collectionName = 'foods';
   bool useCached = false;
+  GoogleCustomSearch gcs = GoogleCustomSearch();
 
   ///map with full for fullsize images and thumbnail for thumbnails image
   FutureOr<List<Map<String,ImageProvider>>> fetchedImages;
@@ -32,7 +33,6 @@ class Result extends StatefulWidget {
   }
 
   FutureOr<List<Map<String,ImageProvider>>> getImages() async {
-    GoogleCustomSearch gcs = GoogleCustomSearch();
     return gcs.searchImage(this.result, cached: useCached);
   }
 
@@ -58,15 +58,20 @@ class _ResultState extends State<Result> {
     return await Future.value(widget.foods).then((foods) async {
       return await foods.doc(widget.id).get().then((DocumentSnapshot documentSnapshot) async {
         Map<String, dynamic> data = {};
+        bool exist = false;
         if (documentSnapshot.exists) {
+          exist = true;
           data = documentSnapshot.data();
-          return data;
         } else {
           data["label"] = widget.result;
+        }
+        if(!exist || data["images"] == null ){
+          data['images'] = widget.gcs.getImage(widget.result, cached: false) ?? null;
           return await foods.doc(widget.id).set(data).then((value) {
             return data;
-          })
-            .catchError((error) => print("Failed to add food: $error"));
+          }).catchError((error) => print("Failed to add food: $error"));
+        }else{
+          return data;
         }
       });
     });
@@ -204,75 +209,76 @@ class _ResultState extends State<Result> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return StreamBuilder(
-                stream: FirebaseFirestore.instance.collection(widget.collectionName).doc(widget.id.toString()).snapshots(),
-                builder: (context, foodSnapshot) {
-                  if (foodSnapshot.hasData && foodSnapshot.data != null) {
-                    DocumentSnapshot foodDoc = foodSnapshot.data;
-                    Map<String,dynamic> foodData = foodDoc.data();
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          child : Padding(
-                            padding: const EdgeInsets.only(top:8.0, bottom: 8),
-                            child: FutureBuilder(
-                              future: Future.value(widget.fetchedImages),
-                              builder: (context, gcsImagesSnapshot){
-                                if(gcsImagesSnapshot.connectionState == ConnectionState.done && snapshot.data != null){
-                                  List<Map<String,ImageProvider>> images = gcsImagesSnapshot.data;
-                                  if(images != null){
-                                    if(images.length>1){
-                                        return CarouselSlider(
-                                          items: images.map((image){
-                                            return FadeInImage(
-                                              image: image["full"],
-                                              placeholder: image["thumbnail"],
-                                              height: 200,
-                                              width: 300,
-                                              fit: BoxFit.cover,
-                                            );
-                                          }).toList(),
-                                          options: CarouselOptions(
-                                            autoPlay: true,
-                                            height: 200,
-                                            initialPage: 0
-                                          ),
-                                        );
-                                    }
-                                    if(images.length== 1){
-                                        return FadeInImage(
-                                          image: images[0]["full"],
-                                          placeholder: images[0]["thumbnail"],
-                                          height: 200,
-                                          width: 300,
-                                          fit: BoxFit.cover,
-                                        );
-                                    }
+                  stream: FirebaseFirestore.instance.collection(
+                      widget.collectionName)
+                      .doc(widget.id.toString())
+                      .snapshots(),
+                  builder: (context, foodSnapshot) {
+                    if (foodSnapshot.hasData && foodSnapshot.data != null) {
+                      DocumentSnapshot foodDoc = foodSnapshot.data;
+                      Map<String, dynamic> foodData = foodDoc.data();
+                      List<Map<String, dynamic>> images = foodData["images"];
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 8),
+                                child: (images != null) ? (images.length > 1)
+                                    ? CarouselSlider(
+                                  items: images.map((image) {
+                                    return FadeInImage(
+                                      image: image["full"],
+                                      placeholder: image["thumbnail"],
+                                      height: 200,
+                                      width: 300,
+                                      fit: BoxFit.cover,
+                                      fadeInDuration: Duration(microseconds: 0),
+                                      fadeOutDuration: Duration(
+                                          microseconds: 0),
+                                    );
+                                  }).toList(),
+                                  options: CarouselOptions(
+                                      autoPlay: true,
+                                      height: 200,
+                                      initialPage: 0
+                                  ),
+                                )
+                                    : (images.length == 1) ?
+                                FadeInImage(
+                                  image: images[0]["full"],
+                                  placeholder: images[0]["thumbnail"],
+                                  height: 200,
+                                  width: 300,
+                                  fit: BoxFit.cover,
+                                  fadeInDuration: Duration(microseconds: 0),
+                                  fadeOutDuration: Duration(microseconds: 0),
+                                ) :
 
-                                  }
-                                  return Container();
-                                }else{
-                                  return Container();
-                                }
-                              },
+                                Container() :
+                                Container()
+
+
                             ),
                           ),
-                        ),
-                        Column(
-                            mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               ListTile(
-                                title: Text("${foodData["label"]} in your position ? "),
-                                leading: Icon(Icons.not_listed_location),
-                                onTap:  () {
-                                  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
-                                  _launchURL(googleUrl);
-                                }),
+                                  title: Text(
+                                      "${foodData["label"]} in your position ? "),
+                                  leading: Icon(Icons.not_listed_location),
+                                  onTap: () {
+                                    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
+                                    _launchURL(googleUrl);
+                                  }),
                               ListTile(
-                                  title:Text("Get recipes for ${foodData["label"]}"),
+                                  title: Text(
+                                      "Get recipes for ${foodData["label"]}"),
                                   leading: Icon(Icons.receipt),
-                                  onTap:  () {
+                                  onTap: () {
                                     //Spoonacular.searchFood(foodData["label"]);
                                     String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
                                     _launchURL(allrecipesUrl);
@@ -282,12 +288,12 @@ class _ResultState extends State<Result> {
                               Container()
                             ],
                           ),
-                      ],
-                    );
-                  }else{
-                    return  CircularProgressIndicator();
+                        ],
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
                   }
-                }
               );
             } else {
               return CircularProgressIndicator();

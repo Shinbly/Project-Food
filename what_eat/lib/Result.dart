@@ -11,7 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'package:whateat/GoogleCustomSearch.dart';
+import 'file:///C:/Project-Food/what_eat/lib/APIs/GoogleCustomSearch.dart';
+import 'package:whateat/APIs/Spoonacular.dart';
 
 
 
@@ -20,67 +21,19 @@ class Result extends StatefulWidget {
   String id;
   FutureOr<CollectionReference> foods;
   String collectionName = 'foods';
-  FutureOr<dynamic> wikipediaPage;
-  FutureOr<List<ImageProvider>> fetchedImages;
+  bool useCached = false;
+  GoogleCustomSearch gcs = GoogleCustomSearch();
+
+  ///map with full for fullsize images and thumbnail for thumbnails image
+  FutureOr<List<Map<String,ImageProvider>>> fetchedImages;
 
   Result(this.result, this.id){
     foods = initDB();
     fetchedImages = getImages();
   }
 
-  FutureOr<List<ImageProvider>> getImages() async {
-    GoogleCustomSearch gcs = GoogleCustomSearch();
-    return gcs.searchImage("\"${this.result}\"", 5).then((value){
-      List<dynamic> items = value["items"];
-      List<dynamic> urls = items.map((item){
-        return item["link"];
-      }).toList();
-      return urls.map((e) => NetworkImage(e.toString())).toList();
-    });
-
-    /*
-      try {
-
-        String titleQuery = this.result.split(' ').join('%20');
-        if(retry)
-          titleQuery = titleQuery.substring(0, titleQuery.length-1);
-        String apiUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=${titleQuery}&prop=images&format=json";
-        print(apiUrl);
-        return await http.get(apiUrl).then((rep) {
-          List<Image> imageList = [];
-          Map<String, dynamic> jsonData = jsonDecode(rep.body);
-          List<dynamic> images = jsonData["query"]["pages"][jsonData["query"]["pages"].keys.first]["images"];
-          List<Future<String>> urls;
-          if(images != null && images.length> 0){
-            urls = images.map((image) async {
-              String title = image["title"];
-              if (!title.contains('.svg')) {
-                String mediaUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=${title.split(' ').join('%20')}&prop=imageinfo&iiprop=url&format=json";
-                dynamic mediaRep = await http.get(mediaUrl);
-                dynamic jsonDataMedia = jsonDecode(mediaRep.body);
-                String imageUrl = jsonDataMedia["query"]["pages"][jsonDataMedia["query"]["pages"].keys.first]["imageinfo"][0]["url"];
-                return imageUrl;
-              } else {
-                return null;
-              }
-            }).toList();
-            return Future.wait(urls).then((value) {
-              List urls = value.sublist(0);
-              urls.removeWhere((element) => element == null);
-              print(urls);
-              return urls.map((e) => NetworkImage(e)).toList();
-            });
-          }else{
-            if(titleQuery.endsWith('s') && !retry){
-              return getImages(retry: true);
-            }
-            return [];
-          }
-        });
-      }catch(e){
-        print(e);
-        return [];
-      }*/
+  FutureOr<List<Map<String,ImageProvider>>> getImages() async {
+    return gcs.searchImage(this.result, cached: useCached);
   }
 
   Future<CollectionReference> initDB() async {
@@ -105,15 +58,20 @@ class _ResultState extends State<Result> {
     return await Future.value(widget.foods).then((foods) async {
       return await foods.doc(widget.id).get().then((DocumentSnapshot documentSnapshot) async {
         Map<String, dynamic> data = {};
+        bool exist = false;
         if (documentSnapshot.exists) {
+          exist = true;
           data = documentSnapshot.data();
-          return data;
         } else {
           data["label"] = widget.result;
+        }
+        if(!exist || data["images"] == null ){
+          data['images'] = widget.gcs.getImage(widget.result, cached: false) ?? null;
           return await foods.doc(widget.id).set(data).then((value) {
             return data;
-          })
-            .catchError((error) => print("Failed to add food: $error"));
+          }).catchError((error) => print("Failed to add food: $error"));
+        }else{
+          return data;
         }
       });
     });
@@ -251,102 +209,77 @@ class _ResultState extends State<Result> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return StreamBuilder(
-                stream: FirebaseFirestore.instance.collection(widget.collectionName).doc(widget.id.toString()).snapshots(),
-                builder: (context, foodSnapshot) {
-                  if (foodSnapshot.hasData && foodSnapshot.data != null) {
-                    DocumentSnapshot foodDoc = foodSnapshot.data;
-                    Map<String,dynamic> foodData = foodDoc.data();
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          child : Padding(
-                            padding: const EdgeInsets.only(top:8.0, bottom: 8),
-                            child: FutureBuilder(
-                              future: Future.value(widget.fetchedImages),
-                              builder: (context, wikiImagesSnapshot){
-                                if(wikiImagesSnapshot.connectionState == ConnectionState.done){
-                                  List<ImageProvider> images = wikiImagesSnapshot.data;
-                                  if(images != null){
-                                    if(images.length>1){
-                                        return CarouselSlider(
-                                          items: images.map((e){
-                                            return FadeInImage(
-                                              image: e,
-                                              placeholder: AssetImage("color_placeholder.png"),
-                                              height: 200,
-                                              width: 300,
-                                              fit: BoxFit.cover,
-                                            );
-                                          }).toList(),
-                                          options: CarouselOptions(
-                                            autoPlay: true,
-                                            height: 200,
-                                            initialPage: 0
-                                          ),
-                                        );
-                                    }
-                                    if(images.length== 1){
-                                        return FadeInImage(
-                                          image: images[0],
-                                          placeholder: AssetImage("color_placeholder.png"),
-                                          height: 200,
-                                          width: 300,
-                                          fit: BoxFit.cover,
-                                        );
-                                    }
+                  stream: FirebaseFirestore.instance.collection(
+                      widget.collectionName)
+                      .doc(widget.id.toString())
+                      .snapshots(),
+                  builder: (context, foodSnapshot) {
+                    if (foodSnapshot.hasData && foodSnapshot.data != null) {
+                      DocumentSnapshot foodDoc = foodSnapshot.data;
+                      Map<String, dynamic> foodData = foodDoc.data();
+                      List<Map<String, dynamic>> images = foodData["images"];
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 8),
+                                child: (images != null) ? (images.length > 1)
+                                    ? CarouselSlider(
+                                  items: images.map((image) {
+                                    return FadeInImage(
+                                      image: image["full"],
+                                      placeholder: image["thumbnail"],
+                                      height: 200,
+                                      width: 300,
+                                      fit: BoxFit.cover,
+                                      fadeInDuration: Duration(microseconds: 0),
+                                      fadeOutDuration: Duration(
+                                          microseconds: 0),
+                                    );
+                                  }).toList(),
+                                  options: CarouselOptions(
+                                      autoPlay: true,
+                                      height: 200,
+                                      initialPage: 0
+                                  ),
+                                )
+                                    : (images.length == 1) ?
+                                FadeInImage(
+                                  image: images[0]["full"],
+                                  placeholder: images[0]["thumbnail"],
+                                  height: 200,
+                                  width: 300,
+                                  fit: BoxFit.cover,
+                                  fadeInDuration: Duration(microseconds: 0),
+                                  fadeOutDuration: Duration(microseconds: 0),
+                                ) :
 
-                                  }
-                                  return Container();
-                                }else{
-                                  return Container( width : 200, height: 200,child: Center(child: CircularProgressIndicator(),));
-                                }
-                              },
+                                Container() :
+                                Container()
+
+
                             ),
                           ),
-                        ),
-                        Column(
-                            mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              foodData["photoUrl"] != null ?
-                              Image.network(foodData["photoUrl"]) :
-                              Container(
-                                child: Column(
-                                  mainAxisAlignment:  MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    InkWell(
-                                      onTap: (){uploadPic(context);},
-                                      child: Container(
-                                        child :Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:  CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text("add a Picture for ${foodData["label"]}"),
-                                            Icon(Icons.add_a_photo),
-                                          ],
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.black26
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
                               ListTile(
-                                title: Text("${foodData["label"]} in your position ? "),
-                                leading: Icon(Icons.not_listed_location),
-                                onTap:  () {
-                                  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
-                                  _launchURL(googleUrl);
-                                }),
+                                  title: Text(
+                                      "${foodData["label"]} in your position ? "),
+                                  leading: Icon(Icons.not_listed_location),
+                                  onTap: () {
+                                    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
+                                    _launchURL(googleUrl);
+                                  }),
                               ListTile(
-                                  title:Text("Get recipes for ${foodData["label"]}"),
+                                  title: Text(
+                                      "Get recipes for ${foodData["label"]}"),
                                   leading: Icon(Icons.receipt),
-                                  onTap:  () {
+                                  onTap: () {
+                                    //Spoonacular.searchFood(foodData["label"]);
                                     String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
                                     _launchURL(allrecipesUrl);
                                   }),
@@ -355,12 +288,12 @@ class _ResultState extends State<Result> {
                               Container()
                             ],
                           ),
-                      ],
-                    );
-                  }else{
-                    return  CircularProgressIndicator();
+                        ],
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
                   }
-                }
               );
             } else {
               return CircularProgressIndicator();

@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'file:///C:/Project-Food/what_eat/lib/APIs/GoogleCustomSearch.dart';
+import 'package:whateat/APIs/GoogleCustomSearch.dart';
 import 'package:whateat/APIs/Spoonacular.dart';
 
 
@@ -29,11 +29,6 @@ class Result extends StatefulWidget {
 
   Result(this.result, this.id){
     foods = initDB();
-    fetchedImages = getImages();
-  }
-
-  FutureOr<List<Map<String,ImageProvider>>> getImages() async {
-    return gcs.searchImage(this.result, cached: useCached);
   }
 
   Future<CollectionReference> initDB() async {
@@ -65,8 +60,8 @@ class _ResultState extends State<Result> {
         } else {
           data["label"] = widget.result;
         }
-        if(!exist || data["images"] == null ){
-          data['images'] = widget.gcs.getImage(widget.result, cached: false) ?? null;
+        if(!exist || data["images"] == null){
+          data['images'] = await widget.gcs.searchImage(widget.result, cached: false) ?? null;
           return await foods.doc(widget.id).set(data).then((value) {
             return data;
           }).catchError((error) => print("Failed to add food: $error"));
@@ -217,7 +212,7 @@ class _ResultState extends State<Result> {
                     if (foodSnapshot.hasData && foodSnapshot.data != null) {
                       DocumentSnapshot foodDoc = foodSnapshot.data;
                       Map<String, dynamic> foodData = foodDoc.data();
-                      List<Map<String, dynamic>> images = foodData["images"];
+                      List<dynamic> images = foodData["images"];
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -229,8 +224,8 @@ class _ResultState extends State<Result> {
                                     ? CarouselSlider(
                                   items: images.map((image) {
                                     return FadeInImage(
-                                      image: image["full"],
-                                      placeholder: image["thumbnail"],
+                                      image: NetworkImage(image["full"]),
+                                      placeholder: image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]),
                                       height: 200,
                                       width: 300,
                                       fit: BoxFit.cover,
@@ -247,8 +242,8 @@ class _ResultState extends State<Result> {
                                 )
                                     : (images.length == 1) ?
                                 FadeInImage(
-                                  image: images[0]["full"],
-                                  placeholder: images[0]["thumbnail"],
+                                  image: NetworkImage(images[0]["full"]),
+                                  placeholder: NetworkImage(images[0]["thumbnail"]),
                                   height: 200,
                                   width: 300,
                                   fit: BoxFit.cover,

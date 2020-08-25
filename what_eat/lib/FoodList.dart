@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'file:///C:/Project-Food/what_eat/lib/APIs/GoogleCustomSearch.dart';
+import 'APIs/GoogleCustomSearch.dart';
 import 'package:whateat/Result.dart';
 
 class FoodList extends StatefulWidget {
@@ -19,8 +19,6 @@ class _FoodListState extends State<FoodList> {
   String collectionName = 'foods';
   ScrollController _scrollController;
   Future init;
-	GoogleCustomSearch gcs;
-  FutureOr<Map<String, ImageProvider>> thumbnails = {};
   bool useCached = false;
 
   @override
@@ -31,39 +29,11 @@ class _FoodListState extends State<FoodList> {
     init = Firebase.initializeApp().then((app){
       firestore = FirebaseFirestore.instance;
       return ;
+
     });
-
-    thumbnails = setList();
-
     _scrollController = ScrollController();
-		gcs = GoogleCustomSearch();
 
 
-  }
-
-  Future<Map<String, ImageProvider>> setList() async {
-    return await Future.value(init).then((res) async {
-      return await rootBundle.loadString("assets/classes.json").then((String data) {
-        Map<String, dynamic> foods = json.decode(data);
-        Map<String, ImageProvider> thumbnails = {};
-        foods.forEach((key, value) async {
-          await firestore.collection(collectionName).doc(key).get().then((DocumentSnapshot documentSnapshot) async {
-            Map<String, dynamic> data = {};
-            if (documentSnapshot.exists) {
-              return data;
-            } else {
-              Map<String, dynamic> food = {};
-              food["label"] = value['label'];
-              return await firestore.collection(collectionName).doc(key).set(food).then((value) {
-                return;
-              }).catchError((error) => print("Failed to add food: $error"));
-            }
-          });
-          thumbnails[key]= (await gcs.getImage(value['label'],cached: useCached))['thumbnail'];
-        });
-        return thumbnails;
-      });
-    });
   }
 
   @override
@@ -119,22 +89,11 @@ class _FoodListState extends State<FoodList> {
                                   leading: Container(
                                     height: 100,
                                     width: 100,
-                                    child : foodData['photoUrl'] != null ?
-                                    Image.network(foodData["photoUrl"], fit: BoxFit.cover,) :
-                                    FutureBuilder(
-													          future: Future.value(thumbnails),
-													          builder: (context, snapshot){
-													            if(snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data["label"] != null){
-																				return FadeInImage(
-                                            image: snapshot.data["label"],
-                                            placeholder: AssetImage("assets/color_placeholder.png"),
-                                            fit: BoxFit.cover,
-                                          );
-																			}else{
-													              return Image.asset("assets/color_placeholder.png",fit: BoxFit.cover);
-																			}
-																		}
-																	),
+                                    child : foodData["images"] != null ?
+                                    foodData["images"][0]["thumbnail"].contains("data:image") ?
+                                      Image.memory(base64Decode(foodData["images"][0]["thumbnail"].split(',').removeLast()),fit: BoxFit.cover) :
+                                      Image.network(foodData["images"][0]["thumbnail"],fit: BoxFit.cover) :
+                                    Image.asset("assets/color_placeholder.png",fit: BoxFit.cover)
                                   ),
 
                                 );

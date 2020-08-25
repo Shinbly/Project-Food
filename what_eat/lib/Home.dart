@@ -48,6 +48,19 @@ class _HomeState extends State<Home> {
                 ),),
               ),
             ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              height:  MediaQuery.of(context).size.height * 0.1,
+              child: RaisedButton(
+                onPressed: () {Navigator.of(context).pushNamed('/list');},
+                color: Colors.red,
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child:  Text("suggest some Food", style: TextStyle(
+                    fontSize: 20.0
+                ),),
+              ),
+            ),
             Container()
           ],
         ),

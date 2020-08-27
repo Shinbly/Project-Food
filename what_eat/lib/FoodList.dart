@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:whateat/Widgets/ImageWithThumbnail.dart';
 import 'APIs/GoogleCustomSearch.dart';
 import 'package:whateat/Result.dart';
 
@@ -78,6 +79,7 @@ class _FoodListState extends State<FoodList> {
 
                                 // showing food here
                                 return ListTile(
+
                                   onTap: (){
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (context){
@@ -90,9 +92,15 @@ class _FoodListState extends State<FoodList> {
                                     height: 100,
                                     width: 100,
                                     child : foodData["images"] != null ?
-                                    foodData["images"][0]["thumbnail"].contains("data:image") ?
-                                      Image.memory(base64Decode(foodData["images"][0]["thumbnail"].split(',').removeLast()),fit: BoxFit.cover) :
-                                      Image.network(foodData["images"][0]["thumbnail"],fit: BoxFit.cover) :
+                                    ImageThumbnail(
+                                      thumbnail: foodData["images"][0]["thumbnail"].contains("data:image") ?
+                                        MemoryImage(base64Decode(foodData["images"][0]["thumbnail"].split(',').removeLast())) :
+                                        NetworkImage(foodData["images"][0]["thumbnail"]),
+                                      image: NetworkImage(foodData["images"][0]["full"]),
+                                      fit: BoxFit.cover,
+                                      height: 100,
+                                      width: 100,
+                                    ) :
                                     Image.asset("assets/color_placeholder.png",fit: BoxFit.cover)
                                   ),
 

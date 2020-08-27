@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:whateat/APIs/GoogleCustomSearch.dart';
 import 'package:whateat/APIs/Spoonacular.dart';
+import 'package:whateat/Widgets/ImageWithThumbnail.dart';
 
 
 
@@ -223,15 +224,12 @@ class _ResultState extends State<Result> {
                                 child: (images != null) ? (images.length > 1)
                                     ? CarouselSlider(
                                   items: images.map((image) {
-                                    return FadeInImage(
+                                    return ImageThumbnail(
                                       image: NetworkImage(image["full"]),
-                                      placeholder: image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]),
+                                      thumbnail: image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]),
                                       height: 200,
                                       width: 300,
                                       fit: BoxFit.cover,
-                                      fadeInDuration: Duration(microseconds: 0),
-                                      fadeOutDuration: Duration(
-                                          microseconds: 0),
                                     );
                                   }).toList(),
                                   options: CarouselOptions(
@@ -241,14 +239,12 @@ class _ResultState extends State<Result> {
                                   ),
                                 )
                                     : (images.length == 1) ?
-                                FadeInImage(
+                                ImageThumbnail(
                                   image: NetworkImage(images[0]["full"]),
-                                  placeholder: NetworkImage(images[0]["thumbnail"]),
+                                  thumbnail: NetworkImage(images[0]["thumbnail"]),
                                   height: 200,
                                   width: 300,
                                   fit: BoxFit.cover,
-                                  fadeInDuration: Duration(microseconds: 0),
-                                  fadeOutDuration: Duration(microseconds: 0),
                                 ) :
 
                                 Container() :

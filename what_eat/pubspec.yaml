@@ -33,6 +33,7 @@ dependencies:
   url_launcher:
   dartpedia: ^1.6.6
   carousel_slider: ^2.2.1
+  transparent_image: ^1.0.0
 
 
 

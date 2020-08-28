@@ -50,6 +50,10 @@ class _ResultState extends State<Result> {
     super.initState();
   }
 
+  Future<void> signalPictures() async {
+    (await Future.value(widget.foods)).doc(widget.id).update({'verifiedImage':false});
+  }
+
   Future<Map<String, dynamic>> getDoc() async {
     return await Future.value(widget.foods).then((foods) async {
       return await foods.doc(widget.id).get().then((DocumentSnapshot documentSnapshot) async {
@@ -273,6 +277,13 @@ class _ResultState extends State<Result> {
                                     //Spoonacular.searchFood(foodData["label"]);
                                     String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
                                     _launchURL(allrecipesUrl);
+                                  }),
+
+                              ListTile(
+                                  title: Text(""),
+                                  subtitle: Text("the pictres are not right"),
+                                  onTap: () {
+                                    signalPictures();
                                   }),
 
 

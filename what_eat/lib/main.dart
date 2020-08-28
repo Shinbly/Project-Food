@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:whateat/FoodList.dart';
 import 'package:whateat/Home.dart';
+import 'package:whateat/ImageSelector.dart';
 import 'package:whateat/ModelTree.dart';
+import 'package:whateat/Suggestion.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
       title: "What's Dinner?",
       theme: ThemeData(
         primarySwatch: Colors.red,
+        primaryColor: Colors.red[700]
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
@@ -28,6 +31,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => Home(),
         '/list': (context) => FoodList(),
         '/find': (context) => ModelTree(),
+        '/suggest': (context) => Suggestion(),
+        '/photos': (context) => ImageSelector(),
       },
     );
   }

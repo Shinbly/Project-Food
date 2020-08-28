@@ -53,7 +53,7 @@ class _FoodListState extends State<FoodList> {
             builder: (context, snapshot){
               if(snapshot.connectionState == ConnectionState.done){
                 return StreamBuilder(
-                    stream: firestore.collection(collectionName).snapshots(),
+                    stream: firestore.collection(collectionName).orderBy("label").snapshots(),
                     builder: (context, foodsSnapshot){
                       if(foodsSnapshot.hasData && foodsSnapshot.data != null){
                         int nbFood = foodsSnapshot.data.documents.length;

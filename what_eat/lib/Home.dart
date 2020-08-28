@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
               height:  MediaQuery.of(context).size.height * 0.1,
               child: RaisedButton(
                 onPressed: () {Navigator.of(context).pushNamed('/find');},
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 child:  Text("Tell me what I whant", style: TextStyle(
@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
               height:  MediaQuery.of(context).size.height * 0.1,
               child: RaisedButton(
                 onPressed: () {Navigator.of(context).pushNamed('/list');},
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 child:  Text("List all your food", style: TextStyle(
@@ -52,11 +52,24 @@ class _HomeState extends State<Home> {
               width: MediaQuery.of(context).size.width * 0.7,
               height:  MediaQuery.of(context).size.height * 0.1,
               child: RaisedButton(
-                onPressed: () {Navigator.of(context).pushNamed('/list');},
-                color: Colors.red,
+                onPressed: () {Navigator.of(context).pushNamed('/suggest');},
+                color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 child:  Text("suggest some Food", style: TextStyle(
+                    fontSize: 20.0
+                ),),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              height:  MediaQuery.of(context).size.height * 0.1,
+              child: RaisedButton(
+                onPressed: () {Navigator.of(context).pushNamed('/photos');},
+                color: Theme.of(context).primaryColor,
+                textColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child:  Text("Manage the food's picture", style: TextStyle(
                     fontSize: 20.0
                 ),),
               ),

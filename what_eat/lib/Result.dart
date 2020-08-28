@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,7 +67,7 @@ class _ResultState extends State<Result> {
           data["label"] = widget.result;
         }
         if(!exist || data["images"] == null){
-          data['images'] = await widget.gcs.searchImage(widget.result, cached: false) ?? null;
+          data['images'] = await widget.gcs.searchImage("${widget.result} dish", cached: false) ?? null;
           return await foods.doc(widget.id).set(data).then((value) {
             return data;
           }).catchError((error) => print("Failed to add food: $error"));
@@ -219,12 +220,12 @@ class _ResultState extends State<Result> {
                       Map<String, dynamic> foodData = foodDoc.data();
                       List<dynamic> images = foodData["images"];
                       return Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Container(
                             child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 8.0, bottom: 8),
+                                    top: 20.0, bottom: 15),
                                 child: (images != null) ? (images.length > 1)
                                     ? CarouselSlider(
                                   items: images.map((image) {
@@ -237,9 +238,10 @@ class _ResultState extends State<Result> {
                                     );
                                   }).toList(),
                                   options: CarouselOptions(
+                                      autoPlayCurve: Curves.decelerate,
                                       autoPlay: true,
                                       height: 200,
-                                      initialPage: 0
+                                      initialPage: new Random().nextInt(images.length),
                                   ),
                                 )
                                     : (images.length == 1) ?
@@ -279,26 +281,27 @@ class _ResultState extends State<Result> {
                                     _launchURL(allrecipesUrl);
                                   }),
 
-                              ListTile(
-                                  title: Text(""),
-                                  subtitle: Text("the pictres are not right"),
-                                  onTap: () {
-                                    signalPictures();
-                                  }),
+
 
 
                               Container()
                             ],
                           ),
+                          ListTile(
+                              title: Text(""),
+                              subtitle: Text("the pictres are not right"),
+                              onTap: () {
+                                signalPictures();
+                              }),
                         ],
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return Center(child: CircularProgressIndicator());
                     }
                   }
               );
             } else {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
           },
         ),

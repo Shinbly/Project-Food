@@ -26,7 +26,10 @@ class GoogleCustomSearch {
     });
   }
 
-  Future<List<dynamic>> searchImage(String query, {bool cached = true, int nb_images = 5}) async {
+  Future<List<dynamic>> searchImage(String query, {bool cached = true, int nb_images = 5, int offset}) async {
+    if(offset > 90 ){
+      offset = 90;
+    }
     print("search for $query");
     Map<String, dynamic> value;
 
@@ -40,6 +43,7 @@ class GoogleCustomSearch {
       "imgType": "photo",
       "imgColorType": "color",
       "num": nb_images.toString(),
+      "start" : offset.toString(),
     });
     print("at : \nhttps://www.googleapis.com/customsearch/v1?key=${key}&cx=$cx&q=$query&searchType=image&imgType=photo&imgColorType=color&num=5\n");
     return  http.get(apiUri).then((searchResult) {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'dart:io';
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -285,7 +286,7 @@ class _ModelTreeState extends State<ModelTree> {
           builder: (context, snapshot){
             if(snapshot.connectionState == ConnectionState.done){
               return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     ///question :
@@ -293,10 +294,15 @@ class _ModelTreeState extends State<ModelTree> {
                       child: Text(
                           this.currentQuestion,
                           style: TextStyle(
-                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 45,
                             color: Colors.black
                           ),
+                          textAlign: TextAlign.center,
                       ),
+                    ),
+                    Container(
+                      height: 200,
                     ),
 
                     ///answer
@@ -305,24 +311,28 @@ class _ModelTreeState extends State<ModelTree> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             RaisedButton(
-                              child:Text('Yes'),
+                              child:Text('Yes', style: TextStyle( fontSize: 15 , color: Colors.white),),
                               onPressed: (){setValue(1);},
+                              color: Theme.of(context).primaryColor,
                             ),
                             /*RaisedButton(
                       child:Text('Yes and No'),
                       onPressed: (){setValue(2);},
                     ),*/
                             RaisedButton(
-                              child:Text('No'),
+                              child:Text('No', style: TextStyle( fontSize: 15 , color: Colors.white),),
                               onPressed: (){setValue(0);},
+                              color: Theme.of(context).primaryColor,
+
                             )
                           ],
                         )
                     ),
+                    /*
                     ///proba
                     Container(
                       child: Text(infos),
-                    )
+                    )*/
                   ],
                 );
             }else{

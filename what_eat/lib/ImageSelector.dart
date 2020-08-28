@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,8 +20,10 @@ class _ImageSelectorState extends State<ImageSelector> {
   FutureOr<Map<String,dynamic>> futureFoodToModify;
   Map<String,dynamic> foodToModify;
 
+  int offset = 0;
   int current_food = 0;
-
+  int currentLoadedFood = -1;
+  int nb_selected = 0;
 
   bool useCached = false;
   GoogleCustomSearch gcs;
@@ -41,7 +45,7 @@ class _ImageSelectorState extends State<ImageSelector> {
         for(int i=0; i< foodDocs.length ; i++){
           QueryDocumentSnapshot currentDoc = foodDocs[i];
           dynamic data = currentDoc.data();
-          if((data['verifiedImage'] != null && data['verifiedImage'] == false ) || data['images'] == null || (data['images'] != null && data['images'].length < 5)){
+          if((data['verifiedImage'] != null && data['verifiedImage'] == false ) || data['images'] == null || (data['images'] != null && data['images'].length < 3)){
             foodToModify[currentDoc.id] = data;
           }
         }
@@ -51,7 +55,7 @@ class _ImageSelectorState extends State<ImageSelector> {
         for(int i=0; i< foodDocs.length ; i++){
           QueryDocumentSnapshot currentDoc = foodDocs[i];
           dynamic data = currentDoc.data();
-          if((data['verifiedImage'] != null && data['verifiedImage'] == false ) || data['images'] == null || (data['images'] != null && data['images'].length < 5)){
+          if((data['verifiedImage'] != null && data['verifiedImage'] == false ) || data['images'] == null || (data['images'] != null && data['images'].length < 3)){
             foodToModify[currentDoc.id] = data;
           }
         }
@@ -66,7 +70,6 @@ class _ImageSelectorState extends State<ImageSelector> {
     if(current_food < foodToModify.length) {
       Map<String,dynamic> data = foodToModify[foodToModify.keys.elementAt(current_food)];
       List images = data["images"] ?? [];
-      images.addAll(await gcs.searchImage('${data["label"]} dish', nb_images: (10 - images.length)));
       data["images"] = images;
       return data;
     }else{
@@ -74,80 +77,155 @@ class _ImageSelectorState extends State<ImageSelector> {
     }
   }
 
+  Future setImages(List images) async {
+    images = images.map((value) {
+      dynamic image = {'full': value['full'], 'thumbnail':value['thumbnail']};
+      return image;
+    }).toList();
+    await Future.value(firestore).then((FirebaseFirestore instance) async {
+      await instance.collection("foods").doc(foodToModify.keys.elementAt(current_food)).update({'images': images, 'verifiedImage' : true});
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Image Selector"),),
-      body: FutureBuilder(
-        future: Future.value(getCurrentFood()),
-        builder: (context, foodSnapshot){
-          if(foodSnapshot.connectionState == ConnectionState.done){
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: FutureBuilder(
+            future: Future.value(getCurrentFood()),
+            builder: (context, foodSnapshot){
+              if(foodSnapshot.connectionState == ConnectionState.done || current_food == currentLoadedFood){
+                dynamic currentFood;
+                if (currentLoadedFood == current_food){
+                  currentFood = foodToModify[foodToModify.keys.elementAt(current_food)] ?? {'empty':true};
+                }else{
+                  currentFood= foodSnapshot.data;
+                  currentLoadedFood = current_food;
+                }
+                if(currentFood['empty'] ?? false){
+                  return Text('No Pictures to Manage');
+                }
+                List<dynamic> images = currentFood["images"] ?? [];
 
-            dynamic currentFood = foodSnapshot.data();
-            if(currentFood['empty']){
-              return Text('No Pictures to Manage');
-            }
-            List<dynamic> images = currentFood["images"] ?? [];
+                return Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(currentFood["label"], style: TextStyle( fontSize: 20),),
+                      ),
+                      Text("select the images you whant to keep", style: TextStyle( fontSize: 15),),
+                      Container(
+                        height: MediaQuery.of(context).size.width,
+                        child: GridView.count(
+                            crossAxisCount: 3,
+                            children: images.map((dynamic image) {
+                              double width = MediaQuery.of(context).size.width *0.3;
+                              double height = MediaQuery.of(context).size.width * 0.3;
 
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: width,
+                                  height: height,
+                                  child: InkWell(
+                                    onTap: (){
 
+                                      if(image["selected"] == null || image["selected"] == "0"){
+                                        print("selected");
+                                        image["selected"] = "1";
+                                        nb_selected ++;
+                                      }else{
+                                        print("unselected");
 
-            return Container(
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(currentFood["label"]),
-                  ),
-                  GridView.count(
-                      crossAxisCount: 2,
-                      children: images.map((image) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width *0.4,
-                          height: MediaQuery.of(context).size.width *0.3,
-                          child: InkWell(
-                            onLongPress: (){
-                              image["selected"] = true;
-                            },
-                            onTap: (){
-                              image["selected"] = false;
-                            },
-                            child: Stack(
-                              children: [
-                                ImageThumbnail(
-                                  width: MediaQuery.of(context).size.width *0.4,
-                                  height: MediaQuery.of(context).size.width *0.3,
-                                  image: image['full'],
-                                  thumbnail: image['thumbnail'],
-                                  fit: BoxFit.cover,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width *0.4,
-                                  height: MediaQuery.of(context).size.width *0.3,
-                                  decoration: BoxDecoration(
-                                    color: Colors.blueAccent.withOpacity( (image["selected"] != null && image["selected"] == true) ? 0.7 : 0.0)
+                                        image["selected"] = "0";
+                                        nb_selected --;
+                                      }
+                                      setState(() {});
+
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        ImageThumbnail(
+                                          width: width,
+                                          height: height,
+                                          image: NetworkImage(image['full']),
+                                          thumbnail:  image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Container(
+                                          width: width,
+                                          height: height,
+                                          decoration: BoxDecoration(
+                                            color: Colors.blueAccent.withOpacity( (image["selected"] != null && image["selected"] == "1") ? 0.5 : 0.0)
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                                ),
+                              );
+                            }).toList(),
 
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top : 8.0, bottom: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            RaisedButton(
+                              child: nb_selected >= 3 ? Text("Validation of the pictures") : Text("Load more Picture"),
+                              onPressed: () async {
+                                Map<String,dynamic> data = foodToModify[foodToModify.keys.elementAt(current_food)];
+                                List images = data["images"] ?? [];
+                                images.removeWhere((element) => element["selected"] == null || element["selected"] == "0");
+                                if(images.length >= 3){
+
+                                  await setImages(images);
+                                  setState(() {
+                                    current_food +=1;
+                                    nb_selected = 0;
+                                  });
+                                }else{
+                                  Random r = new Random();
+                                  images.addAll(await gcs.searchImage('${data["label"]} dish', nb_images: (6 - images.length), offset: offset));
+                                  offset += 6;
+                                  data["images"] = images;
+                                  foodToModify[foodToModify.keys.elementAt(current_food)] = data;
+                                  setState(() {
+                                  });
+                                }
+                              },
+                            ),
+                            RaisedButton(
+                              child: Text("Next"),
+                              onPressed: () async {
+                                setState(() {
+                                  current_food +=1;
+                                  nb_selected = 0;
+                                  offset = 0;
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  RaisedButton(
-                    child: Text("Valid"),
-                    onPressed: (){
-                      print(images);
-                    },
-                  )
-                ],
-              ),
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
-      )
-    );
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          ),
+        ),
+      );
   }
 
 

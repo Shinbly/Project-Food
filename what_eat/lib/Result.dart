@@ -203,114 +203,164 @@ class _ResultState extends State<Result> {
         centerTitle: true,
         title: Text(widget.result),
       ),
-      body: SingleChildScrollView(
-        child:
-        FutureBuilder(
-          future: Future.value(getDoc()),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return StreamBuilder(
-                  stream: FirebaseFirestore.instance.collection(
-                      widget.collectionName)
-                      .doc(widget.id.toString())
-                      .snapshots(),
-                  builder: (context, foodSnapshot) {
-                    if (foodSnapshot.hasData && foodSnapshot.data != null) {
-                      DocumentSnapshot foodDoc = foodSnapshot.data;
-                      Map<String, dynamic> foodData = foodDoc.data();
-                      List<dynamic> images = foodData["images"];
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20.0, bottom: 15),
-                                child: (images != null) ? (images.length > 1)
-                                    ? CarouselSlider(
-                                  items: images.map((image) {
-                                    return ImageThumbnail(
-                                      image: NetworkImage(image["full"]),
-                                      thumbnail:  image["thumbnail"] != null ? image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]) : null,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/background.png"),
+                    fit: BoxFit.cover
+                )
+            ),
+          ),
+          SingleChildScrollView(
+            child:
+            FutureBuilder(
+              future: Future.value(getDoc()),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection(
+                          widget.collectionName)
+                          .doc(widget.id.toString())
+                          .snapshots(),
+                      builder: (context, foodSnapshot) {
+                        if (foodSnapshot.hasData && foodSnapshot.data != null) {
+                          DocumentSnapshot foodDoc = foodSnapshot.data;
+                          Map<String, dynamic> foodData = foodDoc.data();
+                          List<dynamic> images = foodData["images"];
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0, bottom: 15),
+                                    child: (images != null) ? (images.length > 1)
+                                        ? CarouselSlider(
+                                      items: images.map((image) {
+                                        return ImageThumbnail(
+                                          image: NetworkImage(image["full"]),
+                                          thumbnail:  image["thumbnail"] != null ? image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]) : null,
+                                          height: 200,
+                                          width: 300,
+                                          fit: BoxFit.cover,
+                                        );
+                                      }).toList(),
+                                      options: CarouselOptions(
+                                        autoPlayCurve: Curves.decelerate,
+                                        autoPlay: true,
+                                        height: 200,
+                                        initialPage: new Random().nextInt(images.length),
+                                      ),
+                                    )
+                                        : (images.length == 1) ?
+                                    ImageThumbnail(
+                                      image: NetworkImage(images[0]["full"]),
+                                      thumbnail: images[0]["thumbnail"] != null ? NetworkImage(images[0]["thumbnail"]) : null,
                                       height: 200,
                                       width: 300,
                                       fit: BoxFit.cover,
-                                    );
-                                  }).toList(),
-                                  options: CarouselOptions(
-                                      autoPlayCurve: Curves.decelerate,
-                                      autoPlay: true,
-                                      height: 200,
-                                      initialPage: new Random().nextInt(images.length),
+                                    ) :
+
+                                    Container() :
+                                    Container()
+
+
+                                ),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(top: 20),
+                                    child: ListTile(
+                                        title: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                                              border: Border.all(
+                                                  width: 3
+                                              )
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Text(
+                                                "You should eat : ${foodData["label"]}"),
+                                          ),
+                                        ),
+                                        leading: Image.asset("assets/chef.png", width: 50, height: 100,),
+                                    ),
                                   ),
-                                )
-                                    : (images.length == 1) ?
-                                ImageThumbnail(
-                                  image: NetworkImage(images[0]["full"]),
-                                  thumbnail: images[0]["thumbnail"] != null ? NetworkImage(images[0]["thumbnail"]) : null,
-                                  height: 200,
-                                  width: 300,
-                                  fit: BoxFit.cover,
-                                ) :
+                                  Container(
+                                    margin: EdgeInsets.only(top: 20),
+                                    child: ListTile(
+                                        title: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Text(
+                                                "Find a ${foodData["label"]} restaurant"),
+                                          ),
+                                        ),
+                                        leading: Image.asset("assets/restaurant.png", width: 50, height: 50,),
+                                        onTap: () {
+                                          String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
+                                          _launchURL(googleUrl);
+                                        }),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 20),
+                                    child: ListTile(
+                                        title: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Text(
+                                                "Get recipes for ${foodData["label"]}"),
+                                          ),
+                                        ),
+                                        leading: Image.asset("assets/recipe-book.png", width: 50, height: 50,), //Icon(Icons.receipt),
+                                        onTap: () {
+                                          //Spoonacular.searchFood(foodData["label"]);
+                                          String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
+                                          _launchURL(allrecipesUrl);
+                                        }),
+                                  ),
 
-                                Container() :
-                                Container()
 
 
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(top: 20),
-                                child: ListTile(
-                                    title: Text(
-                                        "Find a ${foodData["label"]} restaurant"),
-                                    leading: Image.asset("assets/restaurant.png", width: 50, height: 50,),
-                                    onTap: () {
-                                      String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
-                                      _launchURL(googleUrl);
-                                    }),
+
+                                  Container()
+                                ],
                               ),
-                              Container(
-                                margin: EdgeInsets.only(top: 20),
-                                child: ListTile(
-                                    title: Text(
-                                        "Get recipes for ${foodData["label"]}"),
-                                    leading: Image.asset("assets/recipe-book.png", width: 50, height: 50,), //Icon(Icons.receipt),
-                                    onTap: () {
-                                      //Spoonacular.searchFood(foodData["label"]);
-                                      String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
-                                      _launchURL(allrecipesUrl);
-                                    }),
-                              ),
-
-
-
-
-                              Container()
+                              /*ListTile(
+                                title: Text(""),
+                                subtitle: Text("the pictres are not right"),
+                                onTap: () {
+                                  signalPictures();
+                                }),*/
                             ],
-                          ),
-                          /*ListTile(
-                              title: Text(""),
-                              subtitle: Text("the pictres are not right"),
-                              onTap: () {
-                                signalPictures();
-                              }),*/
-                        ],
-                      );
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  }
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
+                          );
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      }
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ),
+        ]
       ),
     );
   }

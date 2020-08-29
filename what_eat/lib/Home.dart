@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           image: DecorationImage(
             image: AssetImage("assets/background.png"),
             fit: BoxFit.cover
@@ -98,7 +99,22 @@ class _HomeState extends State<Home> {
                 ),),
               ),
             ),
-            Container()
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20.0),
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: <Widget>[
+
+                    FloatingActionButton(
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
+                    Image.asset("assets/light.png", width: 45, height: 45,),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

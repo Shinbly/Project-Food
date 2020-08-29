@@ -75,7 +75,7 @@ flutter:
     - assets/recipe-book.png
     - assets/restaurant.png
     - assets/background.png
-    - assets/background-dark.png
+    - assets/light.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

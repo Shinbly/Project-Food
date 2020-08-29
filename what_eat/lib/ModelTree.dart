@@ -289,6 +289,14 @@ class _ModelTreeState extends State<ModelTree> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    Container(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Image.asset("assets/chef.png", width: 150, height: 150,),),
+                    ),
+                    Container(
+                      height: 100,
+                    ),
                     ///question :
                     Container(
                       child: Text(

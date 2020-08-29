@@ -53,7 +53,7 @@ class _FoodListState extends State<FoodList> {
           child: Row(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.3, child: Text('AllFood')
+                width: MediaQuery.of(context).size.width * 0.3, child: Text('All meals')
               ),
               Container(
                 decoration: BoxDecoration(
@@ -77,7 +77,7 @@ class _FoodListState extends State<FoodList> {
             ],
           ),
         ) :
-        Center(child: Text('AllFood',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))),
+        Center(child: Text('All meals',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))),
         actions: [
           InkWell(
             onTap: (){
@@ -91,7 +91,7 @@ class _FoodListState extends State<FoodList> {
               setState(() {
               });
             },
-            child:searchMode ?  Icon(Icons.clear, color: Colors.white,) :  Icon(Icons.search, color: Colors.white,),
+            child:searchMode ?  Icon(Icons.clear) :  Icon(Icons.search),
           ),
         ],
 

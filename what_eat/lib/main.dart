@@ -5,14 +5,20 @@ import 'package:whateat/Home.dart';
 import 'package:whateat/ImageSelector.dart';
 import 'package:whateat/ModelTree.dart';
 import 'package:whateat/Suggestion.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+
+  runApp(MyApp(false));
 }
 
 class MyApp extends StatelessWidget {
+  bool isDark;
+
+  MyApp(this.isDark);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

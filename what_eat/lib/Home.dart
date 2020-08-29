@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -7,6 +8,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String background = "assets/background.png";
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,4 +104,5 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 }

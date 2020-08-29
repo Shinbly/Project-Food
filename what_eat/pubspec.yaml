@@ -34,6 +34,7 @@ dependencies:
   dartpedia: ^1.6.6
   carousel_slider: ^2.2.1
   transparent_image: ^1.0.0
+  shared_preferences: ^0.5.10
 
 
 
@@ -74,6 +75,7 @@ flutter:
     - assets/recipe-book.png
     - assets/restaurant.png
     - assets/background.png
+    - assets/background-dark.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

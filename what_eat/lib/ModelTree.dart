@@ -285,56 +285,62 @@ class _ModelTreeState extends State<ModelTree> {
           future: Future.value(init),
           builder: (context, snapshot){
             if(snapshot.connectionState == ConnectionState.done){
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+              return Stack(
                   children: <Widget>[
-                    Container(
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset("assets/chef.png", width: 150, height: 150,),),
-                    ),
-                    Container(
-                      height: 100,
-                    ),
-                    ///question :
-                    Container(
-                      child: Text(
-                          this.currentQuestion,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 45,
-                            color: Colors.black
-                          ),
-                          textAlign: TextAlign.center,
+                    Positioned(
+                      top: 10,
+                      child: Container(
+                        height: 150,
+                        width: MediaQuery.of(context).size.width,
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Image.asset("assets/chef.png", width: 150, height: 150,),),
                       ),
                     ),
-                    Container(
-                      height: 200,
+                    ///question :
+                    Positioned(
+                      top:  200,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                              this.currentQuestion,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 45,
+                                color: Colors.black
+                              ),
+                              textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                     ),
-
                     ///answer
-                    Container(
-                        child : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            RaisedButton(
-                              child:Text('Yes', style: TextStyle( fontSize: 15 , color: Colors.white),),
-                              onPressed: (){setValue(1);},
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            /*RaisedButton(
-                      child:Text('Yes and No'),
-                      onPressed: (){setValue(2);},
-                    ),*/
-                            RaisedButton(
-                              child:Text('No', style: TextStyle( fontSize: 15 , color: Colors.white),),
-                              onPressed: (){setValue(0);},
-                              color: Theme.of(context).primaryColor,
+                    Positioned(
+                      bottom: 30,
+                      child: Container(
+                          child : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              RaisedButton(
+                                child:Text('Yes', style: TextStyle( fontSize: 15 , color: Colors.white),),
+                                onPressed: (){setValue(1);},
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              /*RaisedButton(
+                        child:Text('Yes and No'),
+                        onPressed: (){setValue(2);},
+                      ),*/
+                              RaisedButton(
+                                child:Text('No', style: TextStyle( fontSize: 15 , color: Colors.white),),
+                                onPressed: (){setValue(0);},
+                                color: Theme.of(context).primaryColor,
 
-                            )
-                          ],
-                        )
+                              )
+                            ],
+                          )
+                      ),
                     ),
                     /*
                     ///proba

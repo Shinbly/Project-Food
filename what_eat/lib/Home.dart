@@ -11,7 +11,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("What's Diner ?"),
+        title: Center(
+          child: Text("What's Diner ?",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25
+          ),
+          textAlign: TextAlign.center,),
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -30,7 +36,7 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child:  Text("Tell me what I whant", style: TextStyle(
+                child:  Text("Tell me what I whant to eat", style: TextStyle(
                     fontSize: 20.0
                 ),),
               ),
@@ -43,7 +49,7 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child:  Text("List all your food", style: TextStyle(
+                child:  Text("List all the food", style: TextStyle(
                     fontSize: 20.0
                 ),),
               ),

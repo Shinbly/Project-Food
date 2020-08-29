@@ -21,6 +21,11 @@ class _FoodListState extends State<FoodList> {
   ScrollController _scrollController;
   Future init;
   bool useCached = false;
+  bool isInit = false;
+
+  bool searchMode = false;
+  String searchValue;
+
 
   @override
   void initState() {
@@ -41,7 +46,55 @@ class _FoodListState extends State<FoodList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AllFood'),
+        title: searchMode ?
+        Container(
+          width: MediaQuery.of(context).size.width * 0.7,
+
+          child: Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3, child: Text('AllFood')
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.1),
+                  borderRadius: BorderRadius.all(Radius.circular(8))
+                ),
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: TextField(
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                  onChanged: (value){
+                    searchValue = value;
+                    setState(() {});
+                  },
+                ),
+              ),
+            ],
+          ),
+        ) :
+        Center(child: Text('AllFood',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))),
+        actions: [
+          InkWell(
+            onTap: (){
+              if(searchMode){
+                searchValue = null;
+                searchMode = false;
+              }
+              else{
+                searchMode = true;
+              }
+              setState(() {
+              });
+            },
+            child:searchMode ?  Icon(Icons.clear, color: Colors.white,) :  Icon(Icons.search, color: Colors.white,),
+          ),
+        ],
+
       ),
       body: Padding(
         padding: const EdgeInsets.only(top:5),
@@ -51,12 +104,29 @@ class _FoodListState extends State<FoodList> {
           child : FutureBuilder(
             future: Future.wait([init]),
             builder: (context, snapshot){
-              if(snapshot.connectionState == ConnectionState.done){
+              if(snapshot.connectionState == ConnectionState.done || isInit){
+                isInit = true;
+
                 return StreamBuilder(
                     stream: firestore.collection(collectionName).orderBy("label").snapshots(),
                     builder: (context, foodsSnapshot){
                       if(foodsSnapshot.hasData && foodsSnapshot.data != null){
                         int nbFood = foodsSnapshot.data.documents.length;
+                        List displayedFood = foodsSnapshot.data.documents;
+                        if(searchValue != null){
+                          displayedFood = displayedFood.map((doc){
+                            DocumentSnapshot foodDoc = doc;
+                            Map<String,dynamic> foodData = foodDoc.data();
+                            String label = foodData['label'];
+                            if(label.contains(searchValue)){
+                              return foodDoc;
+                            }else{
+                              return null;
+                            }
+                          }).toList();
+                          displayedFood.removeWhere((element) => element == null);
+                        }
+
                         return ListView.separated(
                               controller: _scrollController,
                               separatorBuilder: (context, int) {
@@ -71,9 +141,9 @@ class _FoodListState extends State<FoodList> {
                                 ),
                                   ),);
                               },
-                              itemCount: nbFood,
+                              itemCount: displayedFood.length,
                               itemBuilder: (context, index) {
-                                DocumentSnapshot foodDoc = foodsSnapshot.data.documents[index];
+                                DocumentSnapshot foodDoc = displayedFood[index];
                                 Map<String,dynamic> foodData = foodDoc.data();
                                 String label = foodData['label'];
 
@@ -93,9 +163,9 @@ class _FoodListState extends State<FoodList> {
                                     width: 100,
                                     child : foodData["images"] != null ?
                                     ImageThumbnail(
-                                      thumbnail: foodData["images"][0]["thumbnail"].contains("data:image") ?
+                                      thumbnail: foodData["images"][0]["thumbnail"] != null ?  foodData["images"][0]["thumbnail"].contains("data:image") ?
                                         MemoryImage(base64Decode(foodData["images"][0]["thumbnail"].split(',').removeLast())) :
-                                        NetworkImage(foodData["images"][0]["thumbnail"]),
+                                        NetworkImage(foodData["images"][0]["thumbnail"]) : null,
                                       image: NetworkImage(foodData["images"][0]["full"]),
                                       fit: BoxFit.cover,
                                       height: 100,

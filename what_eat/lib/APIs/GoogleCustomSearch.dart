@@ -30,7 +30,6 @@ class GoogleCustomSearch {
     if(offset > 90 ){
       offset = 90;
     }
-    print("search for $query");
     Map<String, dynamic> value;
 
     String key = await Future.value(_api_Key);
@@ -45,28 +44,24 @@ class GoogleCustomSearch {
       "num": nb_images.toString(),
       "start" : offset.toString(),
     });
-    print("at : \nhttps://www.googleapis.com/customsearch/v1?key=${key}&cx=$cx&q=$query&searchType=image&imgType=photo&imgColorType=color&num=5\n");
     return  http.get(apiUri).then((searchResult) {
-      print("request finished found : ${jsonDecode(searchResult.body).keys}");
       value = jsonDecode(searchResult.body);
 
 
       List<dynamic> items = value["items"];
       if (items != null) {
-        print('items not null : ${items.length}');
 
         List<dynamic> images = items.map((dynamic item) {
-          print("\t - ${item['link']}");
-          print("\t\t  ${item['image']['thumbnailLink']}");
           Map<String, String> image = {};
           image['full'] = item['link'];
           image['thumbnail'] = item['image']['thumbnailLink'];
+          image['source'] = "google Image";
           return image;
         }).toList();
-        print('images founds : ${images}');
 
         return images;
       } else {
+        print(value["error"]["message"]);
         print('items null');
         return null;
       }

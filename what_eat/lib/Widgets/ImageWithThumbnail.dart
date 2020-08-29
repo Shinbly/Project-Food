@@ -28,7 +28,7 @@ class ImageThumbnail extends StatelessWidget {
         fit: this.fit,
       ),
       decoration: BoxDecoration(
-        image: DecorationImage(image: this.thumbnail, fit: fit )
+        image: DecorationImage(image: this.thumbnail ?? AssetImage("assets/color_placeholder.png"), fit: fit )
       ) ,
     );
   }

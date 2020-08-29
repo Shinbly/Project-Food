@@ -231,7 +231,7 @@ class _ResultState extends State<Result> {
                                   items: images.map((image) {
                                     return ImageThumbnail(
                                       image: NetworkImage(image["full"]),
-                                      thumbnail: image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]),
+                                      thumbnail:  image["thumbnail"] != null ? image["thumbnail"].contains("data:image") ? MemoryImage(base64Decode(image["thumbnail"].split(',').removeLast())) : NetworkImage(image["thumbnail"]) : null,
                                       height: 200,
                                       width: 300,
                                       fit: BoxFit.cover,
@@ -247,7 +247,7 @@ class _ResultState extends State<Result> {
                                     : (images.length == 1) ?
                                 ImageThumbnail(
                                   image: NetworkImage(images[0]["full"]),
-                                  thumbnail: NetworkImage(images[0]["thumbnail"]),
+                                  thumbnail: images[0]["thumbnail"] != null ? NetworkImage(images[0]["thumbnail"]) : null,
                                   height: 200,
                                   width: 300,
                                   fit: BoxFit.cover,

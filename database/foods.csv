@@ -1,152 +1,152 @@
-,,,,,,,,,,,,,,,,,,,,,,
-Food,FoodId,Does it contain cheese ?,Does it contain dought (ie : bread) ?,Does it contain vegetables ?,Is it healthy ?,Is there a soup ?,Is it cooked in hoven ?,Is it a hot meal ?,Vegetarian ?,Is there sea food or fish ? ,Is it sauce based food ?,Is the preparation fast ?,Is it Asian food ?,Is it Italian food ?,Is it Mexican food ?,Do you eat it with your finger ?,Does it contain Pork ?,Is it Japanese food ?,Does it contain beef ?,Is it Korean food ? ,Is it French food ?,Is it Arabic food ?
-Pizza,0,yes,yes,yes,no,no,yes,yes,no,yes and no,no,yes,no,yes,no,yes,yes and no,no,yes and no,no,no,no
-Hamburger,1,yes,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,no,no,no
-Pasta,2,yes,no,yes,yes and no,no,no,yes,yes and no,yes and no,no,yes,no,yes,no,no,no,no,yes and no,no,no,no
-Hot dog,3,yes and no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,no,no
-Salad,4,yes and no,no,yes,yes,no,no,no,yes and no,no,no,yes,no,no,no,no,no,no,no,no,yes and no,no
-Ramen,5,no,no,yes,yes and no,yes,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,no
-Gratin dauphinois,6,no,no,no,no,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
-vichy carrots,7,no,no,yes,no,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Minestrone,8,yes,no,yes,yes,yes,no,yes,yes and no,no,no,no,no,yes,no,no,yes,no,no,no,no,no
-Pho,9,no,no,yes,yes,yes,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
-Couscous,10,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes
-Paella,11,no,no,yes,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
-Vegetable soup,12,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes and no,yes and no
-Spaghetti bolognese,13,yes and no,no,yes,no,no,no,yes,no,no,yes,yes,no,yes,no,no,no,no,yes,no,no,no
-Fried Spring Rolls,14,no,no,yes,no,no,no,yes,yes and no,no,no,no,yes,no,no,yes,yes and no,no,no,no,no,no
-Chop Suey,15,no,no,yes,yes,no,no,yes,no,yes and no,no,no,yes,no,no,no,no,no,no,no,no,no
-Tartiflette,16,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no
-Tonkatsu,17,no,no,yes and no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,no
-Samosas,18,no,no,yes,no,no,no,yes,yes and no,no,no,no,no,no,no,yes,no,no,yes,no,no,yes
-Chili con carne,19,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no
-Burritos,20,yes and no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no
-Fajitas,21,yes and no,yes,yes,no,no,no,yes,yes and no,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no
-Enchiladas,22,yes and no,no,yes,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no
-veal stew,23,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no
-Bánh bao,24,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,yes,yes,no,no,no,no,no
-Lasagna,25,yes,no,yes,no,no,yes,yes,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no
-Fried noodles,26,no,no,yes,no,no,no,yes,yes and no,no,no,yes,yes,no,no,no,no,no,yes and no,no,no,no
-Korean BBQ,27,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,yes,no,no,no
-Crumble of tomatoes,28,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes and no,no
-Stir mine,29,no,no,yes,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
-Cantonese rice,30,no,no,yes,yes,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no
-Sushis,31,no,no,yes,no,no,no,no,no,yes,no,yes,yes,no,no,yes,no,yes,no,no,no,no
-Kebab,32,no,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,yes
-Falafel,33,no,no,yes,no,no,no,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,no,yes
-Crab chowder,34,yes and no,yes,yes,no,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
-Oysters,35,no,no,no,yes,no,no,no,no,yes,no,yes,no,no,no,yes,no,no,no,no,yes and no,no
-Benedict egg,36,no,no,no,yes,no,no,yes,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no
-Beef bourguignon,37,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no
-Tartar,38,no,no,yes,no,no,no,no,no,no,yes,yes,no,no,no,no,no,no,yes,no,yes,no
-Okonomiyaki,39,yes and no,yes,yes,no,no,no,yes,yes and no,yes,yes,yes,yes,no,no,no,yes,yes,no,no,no,no
-Yakisoba,40,no,no,yes,no,no,no,yes,yes and no,no,yes,no,yes,no,no,no,yes and no,yes,yes and no,no,no,no
-Tempura,41,no,yes,yes,no,no,no,yes,yes and no,yes,no,no,yes,no,no,yes,no,yes,no,no,no,no
-Tofu,42,no,no,yes,yes,no,no,yes,yes,no,no,yes,yes,no,no,no,no,yes,no,no,no,no
-Unagi no Kabayaki,43,no,no,yes,no,no,no,yes,no,yes,no,no,yes,no,no,no,no,yes,no,no,no,no
-Takoyaki,44,no,yes,yes,no,no,no,yes,no,yes,no,no,yes,no,no,no,no,yes,no,no,no,no
-Onigiri,45,no,no,yes,yes,no,no,no,yes and no,yes and no,yes,yes,yes,no,no,yes,no,yes,no,no,no,no
-Tteokbokki,46,no,no,yes,yes,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,yes,no,no
-Pad Thai,47,no,no,yes,yes,no,no,yes,yes and no,no,yes,yes,yes,no,no,no,yes and no,no,no,no,no,no
-Dan Dan Noodles,48,no,no,yes,yes,no,no,yes,yes and no,no,no,yes,yes,no,no,no,yes and no,no,no,no,no,no
-Szechuan Beef,49,no,no,yes,no,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,yes,no,no,no
-General Tso Meatballs,50,no,no,yes,no,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,yes,no,no,no
-Curry,51,no,no,yes,yes,no,no,yes,yes and no,no,yes,yes,yes,no,no,no,no,no,yes and no,no,no,no
-Wonton Soup,52,no,no,yes,no,yes,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
-Lo Mein,53,no,no,yes,yes,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
-Kimchi,54,no,no,yes,yes,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,yes,no,no
-Humus,55,no,no,yes,no,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,yes
-Mac and cheese,56,yes,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no
-Mozzarella and tomato,57,yes,no,yes,yes,no,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,no,no,no
-"Leek, bacon & potato soup",58,no,no,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no
-Chestnut soup,59,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Harira soup,60,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,yes
-Bougna,61,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
-Rougail sausages,62,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no
-Bread Tuna,63,yes,no,no,no,no,yes,yes,no,yes,no,yes,no,no,no,yes,no,no,no,no,yes,no
-Ham Croissant,64,yes,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no
-Endives with ham,65,yes,no,yes,yes,no,yes,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no
-shepherd's pie,66,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no
-Tomato pie,67,yes,yes,yes,no,no,yes,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no
-Cheese omelette,68,yes,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Quiche lorraine,69,yes,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no
-Moussaka,70,no,no,yes,yes,no,yes,yes,no,no,no,no,no,no,no,no,no,no,yes,no,no,no
-Nicoise salad,71,no,no,yes,yes,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no
-Foie gras,72,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no
-Gaspacho,73,no,no,yes,yes,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no
-Gougère cheese,74,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,yes,no
-Piemontaise salad,75,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no
-Tzatziki,76,yes,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no
-Mimosa eggs,77,no,no,yes,no,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Taboule,78,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes
-Cheese soufflé,79,yes,yes,no,no,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
-Oignon Soup,80,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Pumpkin soup,81,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Cutlet Milanaise,82,no,no,no,yes,no,no,yes,no,no,no,yes,no,yes,no,no,yes,no,no,no,no,no
-duo salmon,83,no,no,no,yes,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no
-zucchini soup,84,yes,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Grapefruit shrimp,85,no,no,yes,yes,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no
-Coleslaw,86,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no
-Puff spinach,87,yes,yes,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,yes,no
-Eggplant millefeuille,88,yes,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Shirred eggs,89,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no
-Vegetables terrine,90,no,no,yes,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
-Basque chicken,91,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
-Filet Mignon,92,no,no,yes and no,no,no,no,yes,no,no,no,yes,no,no,no,no,yes and no,no,yes and no,no,no,no
-Tajin,93,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,yes
-Ratatouille,94,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Cheese fondue,95,yes,yes,no,no,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Caramel pork,96,no,no,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no
-Sweet potatoe gratin,97,yes,no,yes,yes,no,yes,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Stuffed zucchini,98,yes,no,yes,yes,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,yes,no,no,no
-Veal paupiette,99,no,no,no,no,no,no,yes,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no
-Sausage lens,100,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no
-Duck breast,101,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Pasta carbonara,102,yes,no,no,no,no,no,yes,no,no,yes,yes,no,yes,no,no,yes,no,no,no,no,no
-Stuffed tomatoes,103,no,no,yes,yes,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,yes,no,yes,no
-Mussels marinara,104,no,no,no,yes,no,no,yes,no,yes,no,yes,no,no,no,yes,no,no,no,no,no,no
-Rizoto,105,yes,no,yes,yes,no,no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no
-Pot au Feu,106,no,no,yes,yes,yes,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no
-Cassoulet,107,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no
-Cod brandade,108,no,no,yes,no,no,yes,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no
-Bouyabesse,109,no,no,yes,yes,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no
-Stuffed ambercup squash,110,yes,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
-Biryani,111,no,no,yes,yes,no,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
-Coq au vin ,112,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Veal marengo,113,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-Dal lens coconut milk,114,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no
-Nuggets,115,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no
-Gnocci,116,no,yes,no,no,no,no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no
-Goulash,117,no,no,yes,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no
-Polenta,118,yes and no,yes,no,yes,no,yes and no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no
-Bo Bun,119,no,no,yes,yes,yes,no,yes,no,no,no,yes,yes,no,no,no,no,no,yes,no,no,no
-Wrap,120,yes and no,yes,yes,yes,no,no,yes and no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no
-Bagel,121,yes and no,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no
-Duck with l'orange,122,no,no,yes,yes,no,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no
-Sauerkraut,123,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no
-Fish and Chips,124,no,no,no,no,no,no,yes,no,yes,no,yes,no,no,no,yes,no,no,no,no,no,no
-Daube provençale,125,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no
-Osso Bucco,126,no,no,yes,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no
-Croque-monsieur,127,yes,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no
-Croziflette,128,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no
-Rice salad,129,no,no,yes,yes,no,no,no,yes and no,yes and no,no,yes,no,no,no,no,no,no,no,no,no,no
-Potato salad,130,no,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no
-Coquille St. Jacque,131,yes,no,no,no,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no
-White pudding and apple,132,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no
-Chakchouka,133,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,yes
-Felfels,134,no,no,yes,yes,no,no,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,no,yes
-Spinash Gratin,135,yes,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
-Chicken marengo,136,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no
-flamenkuche,137,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no
-tian,138,yes,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
-Grilled trout,139,no,no,no,yes,no,no,yes,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no
-bruschetta,140,no,yes,yes,no,no,no,no,no,no,no,yes,no,yes,no,yes,yes,no,no,no,yes,no
-Olives flat bread,141,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no
-Honey Goat's cheese wrap,142,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,yes,no
-Hot goat's cheese,143,yes,yes,yes,no,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no
-steak tartare,144,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,yes,no,yes,no
-tortilla,145,no,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no
-Mouthful queen,146,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no
-Muffin bacon leak,147,yes,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no
-Provencal tomatoes,148,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
-Shrimp cocktail,149,no,no,no,no,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Food,FoodId,Does it contain cheese ?,Does it contain dought (ie : bread) ?,Does it contain vegetables ?,Is it healthy ?,Is there a soup ?,Is it cooked in hoven ?,Is it a hot meal ?,Vegetarian ?,Is there sea food or fish ? ,Is it sauce based food ?,Is the preparation fast ?,Is it Asian food ?,Is it Italian food ?,Is it Mexican food ?,Do you eat it with your finger ?,Does it contain Pork ?,Is it Japanese food ?,Does it contain beef ?,Is it Korean food ? ,Is it French food ?,Is it Arabic food ?,Does it contain Duck ?,Does it contain chicken,Does it contain veal ?,Is it spicy ?,Does it contain Rice ?,Does it contain noodles ?,Does it contain pasta ?,Does it contain egg ?
+Pizza,0,yes,yes,yes,no,no,yes,yes,no,yes and no,no,yes,no,yes,no,yes,yes and no,no,yes and no,no,no,no,no,yes and no,no,no,no,no,no,no
+Hamburger,1,yes,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,yes and no,no,no,no,no,no,no
+Pasta,2,yes,no,yes,yes and no,no,no,yes,yes and no,yes and no,no,yes,no,yes,no,no,no,no,yes and no,no,no,no,no,yes and no,no,no,no,no,yes,yes and no
+Hot dog,3,yes and no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
+Salad,4,yes and no,no,yes,yes,no,no,no,yes and no,no,no,yes,no,no,no,no,no,no,no,no,yes and no,no,no,yes and no,no,no,no,no,no,no
+Ramen,5,no,no,yes,yes and no,yes,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no,yes,no,yes
+Gratin dauphinois,6,no,no,no,no,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+vichy carrots,7,no,no,yes,no,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Minestrone,8,yes,no,yes,yes,yes,no,yes,yes and no,no,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no
+Pho,9,no,no,yes,yes,yes,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,yes and no,no,yes,no,no
+Couscous,10,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Paella,11,no,no,yes,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no
+Vegetable soup,12,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes and no,yes and no,no,no,no,no,no,no,no,no
+Spaghetti bolognese,13,yes and no,no,yes,no,no,no,yes,no,no,yes,yes,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no
+Fried Spring Rolls,14,no,no,yes,no,no,no,yes,yes and no,no,no,no,yes,no,no,yes,yes and no,no,no,no,no,no,no,yes and no,no,no,no,no,no,no
+Chop Suey,15,no,no,yes,yes,no,no,yes,no,yes and no,no,no,yes,no,no,no,no,no,no,no,no,no,no,yes and no,no,no,yes and no,yes and no,no,no
+Tartiflette,16,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Tonkatsu,17,no,no,yes and no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no
+Samosas,18,no,no,yes,no,no,no,yes,yes and no,no,no,no,no,no,no,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no
+Chili con carne,19,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,yes,yes,no,no,no
+Burritos,20,yes and no,no,yes,no,no,no,yes,no,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,yes and no,no,no,no,no
+Fajitas,21,yes and no,yes,yes,no,no,no,yes,yes and no,no,no,yes,no,no,yes,yes,no,no,no,no,no,no,no,yes,no,yes and no,no,no,no,no
+Enchiladas,22,yes and no,no,yes,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no
+veal stew,23,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no
+Bánh bao,24,no,yes,no,no,no,no,yes,no,no,no,yes,yes,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
+Lasagna,25,yes,no,yes,no,no,yes,yes,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no
+Fried noodles,26,no,no,yes,no,no,no,yes,yes and no,no,no,yes,yes,no,no,no,no,no,yes and no,no,no,no,no,yes and no,no,no,no,yes,no,no
+Korean BBQ,27,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,yes,no,no,no,no,no,no,yes and no,yes,no,no,no
+Crumble of tomatoes,28,no,yes,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes and no,no,no,no,no,no,no,no,no,no
+Stir mine,29,no,no,yes,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no
+Cantonese rice,30,no,no,yes,yes,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no
+Sushis,31,no,no,yes,no,no,no,no,no,yes,no,yes,yes,no,no,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no
+Kebab,32,no,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Falafel,33,no,no,yes,no,no,no,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Crab chowder,34,yes and no,yes,yes,no,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Oysters,35,no,no,no,yes,no,no,no,no,yes,no,yes,no,no,no,yes,no,no,no,no,yes and no,no,no,no,no,no,no,no,no,no
+Benedict egg,36,no,no,no,yes,no,no,yes,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes
+Beef bourguignon,37,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no
+Tartar,38,no,no,yes,no,no,no,no,no,no,yes,yes,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no
+Okonomiyaki,39,yes and no,yes,yes,no,no,no,yes,yes and no,yes,yes,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no
+Yakisoba,40,no,no,yes,no,no,no,yes,yes and no,no,yes,no,yes,no,no,no,yes and no,yes,yes and no,no,no,no,no,no,no,no,no,yes,no,no
+Tempura,41,no,yes,yes,no,no,no,yes,yes and no,yes,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
+Tofu,42,no,no,yes,yes,no,no,yes,yes,no,no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
+Unagi no Kabayaki,43,no,no,yes,no,no,no,yes,no,yes,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no
+Takoyaki,44,no,yes,yes,no,no,no,yes,no,yes,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no
+Onigiri,45,no,no,yes,yes,no,no,no,yes and no,yes and no,yes,yes,yes,no,no,yes,no,yes,no,no,no,no,no,yes and no,no,no,yes,no,no,no
+Tteokbokki,46,no,no,yes,yes,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,no,yes,no,no,no,no
+Pad Thai,47,no,no,yes,yes,no,no,yes,yes and no,no,yes,yes,yes,no,no,no,yes and no,no,no,no,no,no,no,yes,no,yes and no,no,yes,no,no
+Dan Dan Noodles,48,no,no,yes,yes,no,no,yes,yes and no,no,no,yes,yes,no,no,no,yes and no,no,no,no,no,no,no,no,no,no,no,yes,no,no
+Szechuan Beef,49,no,no,yes,no,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,yes,no,no,no,no,no,no,yes,no,no,no,no
+General Tso Meatballs,50,no,no,yes,no,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no
+Curry,51,no,no,yes,yes,no,no,yes,yes and no,no,yes,yes,yes,no,no,no,no,no,yes and no,no,no,no,no,no,no,yes and no,yes,no,no,no
+Wonton Soup,52,no,no,yes,no,yes,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Lo Mein,53,no,no,yes,yes,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,yes and no,no,no,no,yes,no,no
+Bun Cha,54,no,no,no,no,yes,no,yes,no,no,yes,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes and no,no,yes,no,no
+Humus,55,no,no,yes,no,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Mac and cheese,56,yes,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no
+Mozzarella and tomato,57,yes,no,yes,yes,no,no,no,yes,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+"Leek, bacon & potato soup",58,no,no,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
+Chestnut soup,59,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Harira soup,60,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Bougna,61,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no
+Rougail sausages,62,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,no,yes and  no,yes,no,no,no
+Bread Tuna,63,yes,no,no,no,no,yes,yes,no,yes,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Ham Croissant,64,yes,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Endives with ham,65,yes,no,yes,yes,no,yes,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+shepherd's pie,66,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no
+Tomato pie,67,yes,yes,yes,no,no,yes,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Cheese omelette,68,yes,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Quiche lorraine,69,yes,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes
+Moussaka,70,no,no,yes,yes,no,yes,yes,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no
+Nicoise salad,71,no,no,yes,yes,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,yes
+Foie gras,72,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no
+Gaspacho,73,no,no,yes,yes,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Gougère cheese,74,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Piemontaise salad,75,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Tzatziki,76,yes,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Mimosa eggs,77,no,no,yes,no,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,yes
+Taboule,78,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Cheese soufflé,79,yes,yes,no,no,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Oignon Soup,80,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Pumpkin soup,81,no,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Cutlet Milanaise,82,no,no,no,yes,no,no,yes,no,no,no,yes,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
+duo salmon,83,no,no,no,yes,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no
+zucchini soup,84,yes,no,yes,yes,yes,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Grapefruit shrimp,85,no,no,yes,yes,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Coleslaw,86,no,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Puff spinach,87,yes,yes,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Eggplant millefeuille,88,yes,no,yes,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Shirred eggs,89,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes
+Vegetables terrine,90,no,no,yes,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Basque chicken,91,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no
+Filet Mignon,92,no,no,yes and no,no,no,no,yes,no,no,no,yes,no,no,no,no,yes and no,no,yes and no,no,no,no,no,no,no,no,no,no,no,no
+Tajin,93,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no,yes and no,no,no,no,no
+Ratatouille,94,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Cheese fondue,95,yes,yes,no,no,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Caramel pork,96,no,no,no,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
+Sweet potatoe gratin,97,yes,no,yes,yes,no,yes,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Stuffed zucchini,98,yes,no,yes,yes,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no
+Veal paupiette,99,no,no,no,no,no,no,yes,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no
+Sausage lens,100,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Duck breast,101,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no
+Pasta carbonara,102,yes,no,no,no,no,no,yes,no,no,yes,yes,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,yes,yes
+Stuffed tomatoes,103,no,no,yes,yes,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no
+Mussels marinara,104,no,no,no,yes,no,no,yes,no,yes,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Rizoto,105,yes,no,yes,yes,no,no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no
+Pot au Feu,106,no,no,yes,yes,yes,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no
+Cassoulet,107,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Cod brandade,108,no,no,yes,no,no,yes,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Bouyabesse,109,no,no,yes,yes,yes,no,yes,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Stuffed ambercup squash,110,yes,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Biryani,111,no,no,yes,yes,no,yes,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no
+Coq au vin ,112,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,yes,no,no,no,no,no,no
+Veal marengo,113,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no
+Dal lens coconut milk,114,no,no,yes,yes,no,no,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Nuggets,115,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no,no,no,no
+Gnocci,116,no,yes,no,no,no,no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Goulash,117,no,no,yes,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no
+Polenta,118,yes and no,yes,no,yes,no,yes and no,yes,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Bo Bun,119,no,no,yes,yes,yes,no,yes,no,no,no,yes,yes,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no
+Wrap,120,yes and no,yes,yes,yes,no,no,yes and no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,yes and no,no,no,no,no,no,no
+Bagel,121,yes and no,yes,yes,no,no,no,yes,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Duck with l'orange,122,no,no,yes,yes,no,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no
+Sauerkraut,123,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Fish and Chips,124,no,no,no,no,no,no,yes,no,yes,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Daube provençale,125,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no
+Osso Bucco,126,no,no,yes,yes,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no
+Croque-monsieur,127,yes,yes,no,no,no,no,yes,no,no,no,yes,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes and no
+Croziflette,128,yes,no,no,no,no,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Rice salad,129,no,no,yes,yes,no,no,no,yes and no,yes and no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no
+Potato salad,130,no,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Coquille St. Jacque,131,yes,no,no,no,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+White pudding and apple,132,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no
+Chakchouka,133,no,no,yes,no,no,no,yes,no,no,yes,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no
+Felfels,134,no,no,yes,yes,no,no,yes,yes,no,no,no,no,no,no,yes,no,no,no,no,no,yes,no,no,no,no,no,no,no,yes
+Spinash Gratin,135,yes,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Chicken marengo,136,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,no,no,yes,no,no,no,no,no,no
+flamenkuche,137,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+tian,138,yes,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Grilled trout,139,no,no,no,yes,no,no,yes,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+bruschetta,140,no,yes,yes,no,no,no,no,no,no,no,yes,no,yes,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Olives flat bread,141,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Honey Goat's cheese wrap,142,yes,yes,no,no,no,no,no,no,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Hot goat's cheese,143,yes,yes,yes,no,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+steak tartare,144,no,no,no,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,yes,no,yes,no,no,no,no,no,no,no,no,no
+tortilla,145,no,no,no,yes,no,no,yes,yes,no,no,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no,no,no,no,no,no
+Mouthful queen,146,yes,yes,no,no,no,yes,yes,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Muffin bacon leak,147,yes,yes,yes,no,no,yes,no,no,no,no,no,no,no,no,yes,yes,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Provencal tomatoes,148,no,no,yes,yes,no,yes,yes,yes,no,no,no,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no
+Shrimp cocktail,149,no,no,no,no,no,no,no,yes,yes,no,yes,no,no,no,no,no,no,no,no,yes,no,no,no,no,no,no,no,no,no

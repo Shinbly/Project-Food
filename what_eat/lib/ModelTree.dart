@@ -10,6 +10,7 @@ import 'package:sklite/tree/tree.dart';
 import 'dart:convert';
 
 import 'package:whateat/Result.dart';
+import 'package:whateat/Widgets/Bubble.dart';
 
 class ModelTree extends StatefulWidget {
 
@@ -316,25 +317,11 @@ class _ModelTreeState extends State<ModelTree> {
                           width: MediaQuery.of(context).size.width,
                           child: Align(
                             alignment: Alignment.center,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(100.0)),
-                                  border: Border.all(
-                                    width: 3
-                                  )
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Text(
-                                    this.currentQuestion,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30,
-                                      color: Colors.black
-                                    ),
-                                    textAlign: TextAlign.center,
-                                ),
+                            child: Bubble( this.currentQuestion,
+                              style : TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                  color: Colors.black
                               ),
                             ),
                           ),

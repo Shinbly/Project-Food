@@ -70,6 +70,10 @@ flutter:
     - assets/google_search.json
     - assets/whateat.png
     - assets/chef.png
+    - assets/whateat_mini.png
+    - assets/recipe-book.png
+    - assets/restaurant.png
+    - assets/background.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

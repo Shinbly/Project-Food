@@ -47,6 +47,7 @@ class _ModelTreeState extends State<ModelTree> {
 
   int currentFeatureIndex = -1;
   String currentQuestion ="";
+  bool isInit = false;
 
   @override
   void initState() {
@@ -280,79 +281,104 @@ class _ModelTreeState extends State<ModelTree> {
           'Model test'
         ),
       ),
-      body: Center(
-        child: FutureBuilder(
-          future: Future.value(init),
-          builder: (context, snapshot){
-            if(snapshot.connectionState == ConnectionState.done){
-              return Stack(
-                  children: <Widget>[
-                    Positioned(
-                      top: 10,
-                      child: Container(
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: Image.asset("assets/chef.png", width: 150, height: 150,),),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/background.png"),
+                fit: BoxFit.cover
+            )
+        ),
+        width: MediaQuery.of(context).size.width,
+        height:  MediaQuery.of(context).size.height,
+        child: Center(
+          child: FutureBuilder(
+            future: Future.value(init),
+            builder: (context, snapshot){
+              if(snapshot.connectionState == ConnectionState.done || isInit){
+                isInit = true;
+                return Stack(
+                    children: <Widget>[
+                      Positioned(
+                        top: 25,
+                        child: Container(
+                          height: 150,
+                          width: MediaQuery.of(context).size.width,
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Image.asset("assets/chef.png", width: 150, height: 150,),),
+                        ),
                       ),
-                    ),
-                    ///question :
-                    Positioned(
-                      top:  200,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                              this.currentQuestion,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 45,
-                                color: Colors.black
+                      ///question :
+                      Positioned(
+                        top:  (MediaQuery.of(context).size.height /2) - 150,
+                        child: Container(
+                          height: 150,
+                          width: MediaQuery.of(context).size.width,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                                  border: Border.all(
+                                    width: 3
+                                  )
                               ),
-                              textAlign: TextAlign.center,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(
+                                    this.currentQuestion,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Colors.black
+                                    ),
+                                    textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    ///answer
-                    Positioned(
-                      bottom: 30,
-                      child: Container(
-                          child : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              RaisedButton(
-                                child:Text('Yes', style: TextStyle( fontSize: 15 , color: Colors.white),),
-                                onPressed: (){setValue(1);},
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              /*RaisedButton(
-                        child:Text('Yes and No'),
-                        onPressed: (){setValue(2);},
-                      ),*/
-                              RaisedButton(
-                                child:Text('No', style: TextStyle( fontSize: 15 , color: Colors.white),),
-                                onPressed: (){setValue(0);},
-                                color: Theme.of(context).primaryColor,
+                      ///answer
+                      Positioned(
+                        bottom: 30,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                            child : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                RaisedButton(
+                                  child:Text('Yes', style: TextStyle( fontSize: 15),),
+                                  onPressed: (){setValue(1);},
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                /*RaisedButton(
+                          child:Text('Yes and No'),
+                          onPressed: (){setValue(2);},
+                        ),*/
+                                RaisedButton(
+                                  child:Text('No', style: TextStyle( fontSize: 15),),
+                                  onPressed: (){setValue(0);},
+                                  color: Theme.of(context).primaryColor,
 
-                              )
-                            ],
-                          )
+                                )
+                              ],
+                            )
+                        ),
                       ),
-                    ),
-                    /*
-                    ///proba
-                    Container(
-                      child: Text(infos),
-                    )*/
-                  ],
-                );
-            }else{
-              return Center(child : CircularProgressIndicator());
-            }
-          },
+                      /*
+                      ///proba
+                      Container(
+                        child: Text(infos),
+                      )*/
+                    ],
+                  );
+              }else{
+                return Center(child : CircularProgressIndicator());
+              }
+            },
+          ),
         ),
       )
     );

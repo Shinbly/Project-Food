@@ -263,23 +263,29 @@ class _ResultState extends State<Result> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              ListTile(
-                                  title: Text(
-                                      "${foodData["label"]} in your position ? "),
-                                  leading: Icon(Icons.not_listed_location),
-                                  onTap: () {
-                                    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
-                                    _launchURL(googleUrl);
-                                  }),
-                              ListTile(
-                                  title: Text(
-                                      "Get recipes for ${foodData["label"]}"),
-                                  leading: Icon(Icons.receipt),
-                                  onTap: () {
-                                    //Spoonacular.searchFood(foodData["label"]);
-                                    String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
-                                    _launchURL(allrecipesUrl);
-                                  }),
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: ListTile(
+                                    title: Text(
+                                        "Find a ${foodData["label"]} restaurant"),
+                                    leading: Image.asset("assets/restaurant.png", width: 50, height: 50,),
+                                    onTap: () {
+                                      String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${foodData["label"]}';
+                                      _launchURL(googleUrl);
+                                    }),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: ListTile(
+                                    title: Text(
+                                        "Get recipes for ${foodData["label"]}"),
+                                    leading: Image.asset("assets/recipe-book.png", width: 50, height: 50,), //Icon(Icons.receipt),
+                                    onTap: () {
+                                      //Spoonacular.searchFood(foodData["label"]);
+                                      String allrecipesUrl = 'https://www.allrecipes.com/search/?wt=${foodData["label"]}';
+                                      _launchURL(allrecipesUrl);
+                                    }),
+                              ),
 
 
 
@@ -287,12 +293,12 @@ class _ResultState extends State<Result> {
                               Container()
                             ],
                           ),
-                          ListTile(
+                          /*ListTile(
                               title: Text(""),
                               subtitle: Text("the pictres are not right"),
                               onTap: () {
                                 signalPictures();
-                              }),
+                              }),*/
                         ],
                       );
                     } else {

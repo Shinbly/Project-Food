@@ -11,8 +11,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Padding(
+          padding: EdgeInsets.all(5.0),
+          child: ClipOval(
+            child: Image(
+              image: AssetImage("assets/whateat.png"),
+            ),
+          ),
+        ),
         title: Center(
-          child: Text("What's Diner ?",style: TextStyle(
+          child: Text("What's for diner ?",style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25
           ),
@@ -20,6 +28,12 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/background.png"),
+            fit: BoxFit.cover
+          )
+        ),
         width: MediaQuery.of(context).size.width,
         height:  MediaQuery.of(context).size.height,
         child: Column(
@@ -29,27 +43,25 @@ class _HomeState extends State<Home> {
 
             Container(),
             Container(
-              width: MediaQuery.of(context).size.width * 0.7,
-              height:  MediaQuery.of(context).size.height * 0.1,
+              width: 300,
+              height:  50,
               child: RaisedButton(
                 onPressed: () {Navigator.of(context).pushNamed('/find');},
                 color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child:  Text("Tell me what I whant to eat", style: TextStyle(
+                child:  Text("Find a meal", style: TextStyle(
                     fontSize: 20.0
                 ),),
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width * 0.7,
-              height:  MediaQuery.of(context).size.height * 0.1,
+              width: 300,
+              height:  50,
               child: RaisedButton(
                 onPressed: () {Navigator.of(context).pushNamed('/list');},
                 color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child:  Text("List all the food", style: TextStyle(
+                child:  Text("List all the meals", style: TextStyle(
                     fontSize: 20.0
                 ),),
               ),
@@ -70,12 +82,11 @@ class _HomeState extends State<Home> {
             ),
             */
             Container(
-              width: MediaQuery.of(context).size.width * 0.7,
-              height:  MediaQuery.of(context).size.height * 0.1,
+              width: 300,
+              height:  50,
               child: RaisedButton(
                 onPressed: () {Navigator.of(context).pushNamed('/photos');},
                 color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 child:  Text("Manage the food's picture", style: TextStyle(
                     fontSize: 20.0

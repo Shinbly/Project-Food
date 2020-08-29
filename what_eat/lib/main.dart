@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "What's Dinner?",
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        primaryColor: Colors.red[700]
+        primarySwatch: Colors.orange,
+        primaryColor: Colors.orange[300]
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.

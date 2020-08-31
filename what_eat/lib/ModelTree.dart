@@ -149,7 +149,8 @@ class _ModelTreeState extends State<ModelTree> {
 
       print('${nb_yes} yes and ${nb_no} no');
 
-      if (input[int.parse(key)] == null && ((feature_distribution != 0 && feature_distribution > distribution) || (feature_distribution == 0 && feature_importance > importance) )){
+      if (input[int.parse(key)] == null && ((feature_distribution != 0 && feature_distribution > distribution)
+          || (feature_distribution == 0 && feature_importance > importance) )){
         distribution = feature_distribution;
         importance = feature_importance;
         next_key = int.parse(key);
@@ -262,13 +263,15 @@ class _ModelTreeState extends State<ModelTree> {
 
   Future<void> found(int id ) async {
     Map<String, dynamic> myFood = await Future.value(this.foods);
-    Navigator.push(context, MaterialPageRoute(builder: (context){return Result(myFood[id.toString()]["label"], id.toString());}));
+    Navigator.push(context, MaterialPageRoute(builder: (context){return Result(myFood[id.toString()]["label"], id.toString());})).then((value) => reset());
   }
 
-  void reset(){
+  Future<void> reset() async {
+    Map<String, dynamic> myFood = await Future.value(this.foods);
+    possibleFoodId = myFood.keys.map((e) => int.parse(e)).toList();
     setState(() {
       this.result = -1;
-      this.input = List(nbFood);
+      this.input = new List(nbQuestions);
       this.infos = "";
       nextQuestion();
     });
@@ -279,11 +282,12 @@ class _ModelTreeState extends State<ModelTree> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Model test'
+          'Meal Quiz'
         ),
       ),
       body: Container(
         decoration: BoxDecoration(
+            color: Theme.of(context).backgroundColor,
             image: DecorationImage(
                 image: AssetImage("assets/background.png"),
                 fit: BoxFit.cover

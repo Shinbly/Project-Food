@@ -88,7 +88,7 @@ class _ResultState extends State<Result> {
 
 
 
-  Future<void> uploadPic(context) async {
+  /*Future<void> uploadPic(context) async {
     ImagePicker imagePicker = ImagePicker();
     PickedFile image;
     PermissionStatus permisionStorage = await Permission.storage.request();
@@ -194,7 +194,7 @@ class _ResultState extends State<Result> {
         });
       });
     }
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -207,6 +207,7 @@ class _ResultState extends State<Result> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
                 image: DecorationImage(
                     image: AssetImage("assets/background.png"),
                     fit: BoxFit.cover
@@ -287,7 +288,8 @@ class _ResultState extends State<Result> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(12.0),
                                             child: Text(
-                                                "You should eat : ${foodData["label"]}"),
+                                                "You should eat : ${foodData["label"]}",
+                                            ),
                                           ),
                                         ),
                                         leading: Image.asset("assets/chef.png", width: 50, height: 100,),

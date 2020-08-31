@@ -6,33 +6,36 @@ import 'package:whateat/ImageSelector.dart';
 import 'package:whateat/ModelTree.dart';
 import 'package:whateat/Suggestion.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whateat/ThemeNotifier.dart';
+import 'package:whateat/Values/themes.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MyApp(false));
+  SharedPreferences.getInstance().then((prefs){
+    var darkModeOn = prefs.getBool('darkMode') ?? false;
+    runApp(
+        ChangeNotifierProvider<ThemeNotifier>(
+          create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
+          child: MyApp(),
+    )
+    );
+  });
+
+
 }
 
 class MyApp extends StatelessWidget {
-  bool isDark;
-
-  MyApp(this.isDark);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
+      theme: themeNotifier.getTheme(),
       title: "What's Dinner?",
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-        primaryColor: Colors.orange[300],
-
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        //visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
       initialRoute: '/',
       routes: {
         '/': (context) => Home(),

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whateat/ThemeNotifier.dart';
+import 'package:whateat/Values/themes.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,12 +11,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String background = "assets/background.png";
+
+  var _darkTheme = false;
+
+  void onThemeChanged(bool value, ThemeNotifier themeNotifier) async {
+    (value)
+        ? themeNotifier.setTheme(darkTheme)
+        : themeNotifier.setTheme(lightTheme);
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setBool('darkMode', value);
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    _darkTheme = (themeNotifier.getTheme() == darkTheme);
+
     return Scaffold(
       appBar: AppBar(
         leading: const Padding(
@@ -34,7 +50,7 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).backgroundColor,
           image: DecorationImage(
             image: AssetImage("assets/background.png"),
             fit: BoxFit.cover
@@ -87,7 +103,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             */
-            Container(
+            /*Container(
               width: 300,
               height:  50,
               child: RaisedButton(
@@ -98,7 +114,7 @@ class _HomeState extends State<Home> {
                     fontSize: 20.0
                 ),),
               ),
-            ),
+            ),*/
             Container(
               width: MediaQuery.of(context).size.width,
               child: Padding(
@@ -109,8 +125,15 @@ class _HomeState extends State<Home> {
 
                     FloatingActionButton(
                       backgroundColor: Theme.of(context).primaryColor,
+                      child: Image.asset("assets/light.png", width: 45, height: 45,),
+                      onPressed: (){
+                        print("essai dark theme");
+                        _darkTheme = !_darkTheme;
+                        onThemeChanged(_darkTheme, themeNotifier);
+                        setState(() {
+                        });
+                      },
                     ),
-                    Image.asset("assets/light.png", width: 45, height: 45,),
                   ],
                 ),
               ),

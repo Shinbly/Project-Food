@@ -99,6 +99,13 @@ class _FoodListState extends State<FoodList> {
       body: Padding(
         padding: const EdgeInsets.only(top:5),
         child: Container(
+            decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                image: DecorationImage(
+                    image: AssetImage("assets/background.png"),
+                    fit: BoxFit.cover
+                )
+            ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child : FutureBuilder(
@@ -118,7 +125,7 @@ class _FoodListState extends State<FoodList> {
                             DocumentSnapshot foodDoc = doc;
                             Map<String,dynamic> foodData = foodDoc.data();
                             String label = foodData['label'];
-                            if(label.contains(searchValue)){
+                            if(label.toLowerCase().contains(searchValue.toLowerCase())){
                               return foodDoc;
                             }else{
                               return null;
@@ -157,7 +164,16 @@ class _FoodListState extends State<FoodList> {
                                         }
                                     ));
                                   },
-                                  title: Text(label),
+                                  title: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Text(label),
+                                      )
+                                  ),
                                   leading: Container(
                                     height: 100,
                                     width: 100,
